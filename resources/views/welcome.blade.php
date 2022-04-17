@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
     <meta name="msapplication-TileColor" content="#000000">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -22,6 +22,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff">
     <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/public/style.css">
     <meta name="description"
         content="Доставка еды по городу Дербент, частые акции и вкус нашей еды не оставят вас равнодушными!" />
@@ -46,6 +47,7 @@
                 background-position: left;
             }
         }
+
     </style>
 </head>
 
@@ -57,9 +59,9 @@
                     <div class="box">
                         <div class="box-main pt-lg-4">
                             <div class="d-flex justify-content-center">
-                                <img src="images/logo.png" alt="" width="100px">
+                                <img src="/public/storage/folder/{{ $main->img_main }}" alt="" width="100px">
                             </div>
-                            <h3 class="text-paprika text-center mt-lg-1">Паприка</h3>
+                            <h3 class="text-paprika text-center mt-lg-1">{{ $main->name_main }}</h3>
                             <div style="background: rgba(0, 0, 0, 0.616);" class="d-flex justify-content-center">
                                 <a class="m-1 text-light" href="#"><i class="bi bi-whatsapp"></i></a>
                                 <a class="m-1 text-light" href="#"><i class="bi bi-telegram"></i></a>
@@ -116,14 +118,16 @@
                                 <div class="offcanvas_modal_shadow">
                                     <div class="offcanvas-header">
                                         <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
-                                        <button type="button" class="btn-close text-reset d-none" data-bs-dismiss="offcanvas"
-                                            aria-label="Close" id="btnClose_canvas"></button>
+                                        <button type="button" class="btn-close text-reset d-none"
+                                            data-bs-dismiss="offcanvas" aria-label="Close"
+                                            id="btnClose_canvas"></button>
                                     </div>
                                     <div class="offcanvas-body text-light">
                                         <div class="d-flex justify-content-center">
-                                            <img src="images/logo.png" alt="" width="150px">
+                                            <img src="/public/storage/folder/{{ $main->img_main }}" alt=""
+                                                width="150px">
                                         </div>
-                                        <h1 class="text-paprika text-center mt-lg-1">Паприка</h1>
+                                        <h1 class="text-paprika text-center mt-lg-1">{{ $main->name_main }}</h1>
                                         <div style="background: rgba(0, 0, 0, 0.616);"
                                             class="d-flex justify-content-center mt-2">
                                             <a class="m-1 fs-4 text-light" href="#"><i class="bi bi-whatsapp"></i></a>
@@ -143,8 +147,8 @@
                                                     <button class="btn text-light active fs-3 mt-lg-1"
                                                         id="v-pills-home-tab" data-bs-toggle="pill"
                                                         data-bs-target="#v-pills-home" type="button" role="tab"
-                                                        aria-controls="v-pills-home"
-                                                        aria-selected="true" onclick="btnClose()">Главная</button>
+                                                        aria-controls="v-pills-home" aria-selected="true"
+                                                        onclick="btnClose()">Главная</button>
                                                     <button class="btn text-light fs-3 mt-lg-1" id="v-pills-profile-tab"
                                                         data-bs-toggle="pill" data-bs-target="#v-pills-profile"
                                                         type="button" role="tab" aria-controls="v-pills-profile"
@@ -152,13 +156,13 @@
                                                     <button class="btn text-light fs-3 mt-lg-1"
                                                         id="v-pills-messages-tab" data-bs-toggle="pill"
                                                         data-bs-target="#v-pills-messages" type="button" role="tab"
-                                                        aria-controls="v-pills-messages"
-                                                        aria-selected="false" onclick="btnClose()">Конструктор</button>
+                                                        aria-controls="v-pills-messages" aria-selected="false"
+                                                        onclick="btnClose()">Конструктор</button>
                                                     <button class="btn text-light fs-3 mt-lg-1 mb-lg-2"
                                                         id="v-pills-settings-tab" data-bs-toggle="pill"
                                                         data-bs-target="#v-pills-settings" type="button" role="tab"
-                                                        aria-controls="v-pills-settings"
-                                                        aria-selected="false" onclick="btnClose()">Корзина</button>
+                                                        aria-controls="v-pills-settings" aria-selected="false"
+                                                        onclick="btnClose()">Корзина</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -438,8 +442,8 @@
                                             <div class="col mt-2 mt-lg-4 ms-lg-0">
                                                 <div class="card border-dark" style=" height: 400px;">
                                                     <img src="images/chudu.jpg"
-                                                        style="height: 200px; object-fit: cover;" class="card-img-top"
-                                                        alt="...">
+                                                        style="height: 200px; object-fit: cover;"
+                                                        class="card-img-top" alt="...">
                                                     <div class="card-body text-black">
                                                         <h3 class="card-title text-center">Чуду с зеленью</h3>
                                                         <p class="card-text">Попробуйте наше вкусное чуду
@@ -474,8 +478,8 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title2 lead">Оформите заказ</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
+                                                    <button type="button" class="btn-close"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="/" method="POST">
@@ -483,8 +487,9 @@
                                                         <div class="mb-2 text-danger"></div>
 
                                                         <div class="form-floating mb-3">
-                                                            <input type="text" name="name" class="form-control bg-light"
-                                                                id="floatingInput" placeholder="Введите номер телефона">
+                                                            <input type="text" name="name"
+                                                                class="form-control bg-light" id="floatingInput"
+                                                                placeholder="Введите номер телефона">
                                                             <label for="floatingInput">Имя</label>
                                                         </div>
                                                         <div class="mb-2 text-danger"></div>
@@ -541,9 +546,7 @@
                                                         -->
 
                                                         <div class="form-floating mb-3 py-3">
-                                                            <textarea class="form-control"
-                                                                placeholder="Leave a comment here"
-                                                                id="floatingTextarea_mess"></textarea>
+                                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea_mess"></textarea>
                                                             <label for="floatingTextarea_mess">Сообщение для
                                                                 курьера (№Кв/офис, Домофон, Подъезд, Этаж)</label>
                                                         </div>
@@ -565,7 +568,8 @@
                                                             </div>
                                                             <div
                                                                 class="d-flex border-1 border-secondary border-bottom py-2">
-                                                                <span class="">Чуду с мясо картошка</span>
+                                                                <span class="">Чуду с мясо
+                                                                    картошка</span>
                                                                 <span class="ms-1">* 5</span>
                                                                 <span class="ms-auto">600 ₽</span>
                                                             </div>
@@ -584,8 +588,8 @@
                                                                 <div class="col ps-lg-4">
                                                                     <div class="d-flex justify-content-center">
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="flexRadioDefault"
+                                                                            <input class="form-check-input"
+                                                                                type="radio" name="flexRadioDefault"
                                                                                 id="flexRadioDefault1">
                                                                             <label class="form-check-label"
                                                                                 for="flexRadioDefault1">
@@ -593,8 +597,8 @@
                                                                             </label>
                                                                         </div>
                                                                         <div class="form-check ms-2">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="flexRadioDefault"
+                                                                            <input class="form-check-input"
+                                                                                type="radio" name="flexRadioDefault"
                                                                                 id="flexRadioDefault2" checked>
                                                                             <label class="form-check-label"
                                                                                 for="flexRadioDefault2">
@@ -649,9 +653,9 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="/public/script.js"></script>
     <script>
-    function btnClose() {
-       btnClose_canvas.click()
-    }
+        function btnClose() {
+            btnClose_canvas.click()
+        }
     </script>
 </body>
 
