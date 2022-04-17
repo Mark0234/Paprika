@@ -1,0 +1,92 @@
+.box-main {
+    background: rgba(19, 18, 18, 0.4);
+    box-shadow: 0 25px 45px rgba(212, 198, 10, 0.3); /* Придает тени по краям*/
+    border: 1px solid rgba(228, 213, 7, 0.1);
+    border-right: 1px solid rgba(190, 236, 21, 0.1); /* тень справа*/
+    border-bottom: 1px solid rgba(152, 182, 18, 0.1); /* тень снизу*/
+    border-radius: 7px; /* округление диалогового окна*/
+    z-index: 10; /* увеличение степени важности над другими блоками*/
+}
+.box-second {
+    background: rgba(19, 18, 18, 0.4);
+    box-shadow: 0 25px 45px rgba(212, 198, 10, 0.3); /* Придает тени по краям*/
+    border: 1px solid rgba(228, 213, 7, 0.1);
+    border-right: 1px solid rgba(190, 236, 21, 0.1); /* тень справа*/
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* тень снизу*/
+    border-radius: 7px; /* округление диалогового окна*/
+    z-index: 10; /* увеличение степени важности над другими блоками*/
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+.text-paprika {
+    font-family: "Shadows Into Light", cursive;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none !important;
+}
+
+.btn {
+    transition: 0.5s;
+}
+
+.btn:hover {
+    color: blue;
+}
+
+@media (max-width: 600px) {
+    .box-main {
+        display: none;
+    }
+}
+
+@media (min-width: 600px) {
+    .btn-offcanvas {
+        display: none;
+    }
+}
+
+.div-menu,
+.div-basket,
+.div-main {
+    overflow: auto;
+    height: 500px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.const-pizza,
+.const-chudu {
+    overflow: auto;
+    height: 400px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.box-main,
+.box-second {
+    height: 95vh;
+}
+.offcanvas_modal {
+    background: url(/public/images/offcanvas.jpg);
+    background-size: 450%;
+    background-repeat: no-repeat;
+}
+.offcanvas_modal_shadow {
+    background: rgba(0, 0, 0, 0.6);
+    height: 97vh;
+}
+
+.btn-eye {
+    position: absolute;
+    z-index: 1000;
+    top: 7px;
+    right: 5px;
+    border-radius: 50%;
+}
+.btn-eye:hover {
+    background-color: rgba(97, 97, 247, 0.1);
+}
