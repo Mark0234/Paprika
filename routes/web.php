@@ -28,5 +28,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/exit', [AuthController::class, 'exit']);
     Route::get('/admin', [MainController::class, 'admin'])->name('admin');
     Route::post('/admin', [MainController::class, 'admin_process']);
-    Route::post('/main', [MainController::class, 'main_process']);
+    Route::post('/main/{id}', [MainController::class, 'main_process']);
 });

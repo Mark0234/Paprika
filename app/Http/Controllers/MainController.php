@@ -16,28 +16,27 @@ class MainController extends Controller
 
     public function admin()
     {
-        return view('admin');
+        $main = MainModel::first();
+        return view('admin',['main' => $main]);
     }
+    
 
-    public function main_process(Request $data)
-    {
-        $valid = $data->validate([
-       'img_main' => ['required', 'image', 'mimetypes:image/jpeg,image/png,image/Webp']
-        ]);
+    public function main_process($id, Request $data)
+    {      
+        $review = MainModel::find($id);
+        if(!empty($data->img_main)){
+            $file = $data->file('img_main');
+            $upload_folder = 'public/folder';
+            $filename = $file->getClientOriginalName();
+            Storage::delete($upload_folder .'/'. $review->img_main);
+            $review->img_main = $filename;
+            Storage::putFileAs($upload_folder, $file, $filename);
+        }
 
-        // загрузка файла
-        $file = $data->file('img_main');
-        $upload_folder = 'public/folder'; //Создается автоматически
-        $filename = $file->getClientOriginalName(); //Сохраняем исходное название изображения
-
-        Storage::putFileAs($upload_folder, $file, $filename);
-
-        $review = new MainModel();
-        $review->img_main = $filename;
         $review->name_main = $data->input('name_main');
         $review->save();
 
-        return redirect()->route('home')->with('success', 'Успешно добавлено!');
+        return redirect()->route('home')->with('success', 'Успешно добавлено');
     }
     
-}
+};

@@ -181,9 +181,9 @@
                                     aria-labelledby="v-pills-home-tab">
                                     <div class="div-main mt-4 mt-lg-0">
                                         <div class="d-flex justify-content-center">
-                                            <span class="fs-4">Паприка Дербент</span>
+                                            <span class="fs-1">Паприка Дербент</span>
                                         </div>
-                                        <p style="font-size: 9pt;" class="text-center mt-1 mt-lg-1">Быстрая доставка еды
+                                        <p class="text-center mt-1 fs-5">Быстрая доставка еды
                                         </p>
 
                                         <div class="d-flex justify-content-center">
@@ -197,10 +197,16 @@
                                             quisquam dolorem!
                                         </div>
 
-                                        <div class="d-flex px-3 pt-3 justify-content-evenly pt-lg-5">
-                                            <div>Быстрая доставка</div>
-                                            <div>Режим работы с 18:00 до 23:00</div>
-                                            <div>Самое вкусное</div>
+                                        <div class="d-flex px-3 pt-3 justify-content-evenly pt-lg-5 flex-wrap">
+                                            <div class="bg-warning px-4 py-3 rounded-pill text-dark lead">Быстрая
+                                                доставка
+                                            </div>
+                                            <div class="bg-warning px-4 py-3 rounded-pill text-dark lead mt-2 mt-lg-0">
+                                                Режим работы с
+                                                18:00 до 23:00</div>
+                                            <div class="bg-warning px-4 py-3 rounded-pill text-dark lead mt-2 mt-lg-0">
+                                                Самое вкусное
+                                            </div>
                                         </div>
 
                                     </div>

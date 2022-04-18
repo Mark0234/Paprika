@@ -28,33 +28,65 @@
                 Выйти из панели управления</a>
         </div>
 
-        <div class="container">
-            <div class="row row-cols-1 row-cols-lg-2 mt-3">
-                <div class="col">
-                    <div class="main bg-light p-2 p-lg-4 m-5">
-                        <form action="/main" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <h2 class="text-center">Главная</h2>
-                            <div class="d-flex justify-content-center">Логотип компании</div>
-                            <div class="d-flex justify-content-center mt-1">
-                                <input type="file" name="img_main" class="form-control w-50"
-                                    placeholder="Логотип компании">
-                            </div>
-                            <div class="d-flex justify-content-center mt-1">
-                                <input type="text" name="name_main" class="form-control w-50"
-                                    placeholder="Наз.компании">
-                            </div>
-                            <div class="d-flex justify-content-center mt-1">
-                                <button class="btn btn-info w-50">Добавить</button>
+        <nav class="mt-2">
+            <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                    type="button" role="tab" aria-controls="nav-home" aria-selected="true">Общее</button>
+                <button class="nav-link" id="nav-main-tab" data-bs-toggle="tab" data-bs-target="#nav-main"
+                    type="button" role="tab" aria-controls="nav-main" aria-selected="false">Главная</button>
+                <button class="nav-link" id="nav-menu-tab" data-bs-toggle="tab" data-bs-target="#nav-menu"
+                    type="button" role="tab" aria-controls="nav-menu" aria-selected="false">Меню</button>
+                <button class="nav-link" id="nav-constructor-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-constructor" type="button" role="tab" aria-controls="nav-constructor"
+                    aria-selected="false">Конструктор</button>
+                <button class="nav-link" id="nav-basket-tab" data-bs-toggle="tab" data-bs-target="#nav-basket"
+                    type="button" role="tab" aria-controls="nav-basket" aria-selected="false">Корзина</button>
+            </div>
+        </nav>
+
+        <div class="tab-content pt-2" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-lg-12 mt-3">
+
+                        <div class="col">
+                            <div class="main bg-light p-2 p-lg-4 m-5">
+                                <form action="/main/{{$main->id}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <h2 class="text-center">Главная</h2>
+                                    <div class="d-flex justify-content-center">Логотип компании</div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input type="file" name="img_main" value="{{ $main->img_main }}"
+                                            class="form-control w-50" placeholder="Логотип компании">
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input type="text" name="name_main" value="{{ $main->name_main }}"
+                                            class="form-control w-50" placeholder="Наз.компании">
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <button class="btn btn-warning w-25">Редактирование</button>
+                                    </div>
+                                </form>
                             </div>
 
-                        </form>
+                        </div>
                     </div>
+                </div>
 
-                </div>
-                <div class="col">
-                    22
-                </div>
+
+            </div>
+            <div class="tab-pane fade" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
+                Главная
+            </div>
+            <div class="tab-pane fade" id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab">
+                Меню
+            </div>
+            <div class="tab-pane fade" id="nav-constructor" role="tabpanel" aria-labelledby="nav-constructor-tab">
+                Конструктор
+            </div>
+            <div class="tab-pane fade" id="nav-basket" role="tabpanel" aria-labelledby="nav-basket-tab">
+                Корзина
             </div>
         </div>
 
