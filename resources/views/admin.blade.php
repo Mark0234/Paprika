@@ -52,25 +52,25 @@
 
                         <div class="col">
                             <div class="main bg-light p-2 p-lg-4 m-5">
-                                <form action="/main/{{$main->id}}" method="POST" enctype="multipart/form-data">
+                                <form action="/main/{{ $main->id }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <h2 class="text-center">Главная</h2>
                                     <div class="d-flex justify-content-center">Логотип компании</div>
                                     <div class="d-flex justify-content-center mt-1">
                                         <input type="file" name="img_main" value="{{ $main->img_main }}"
-                                            class="form-control w-50" placeholder="Логотип компании">
+                                            class="form-control w-75" placeholder="Логотип компании">
                                     </div>
                                     <div class="d-flex justify-content-center mt-1">
                                         <input type="text" name="name_main" value="{{ $main->name_main }}"
-                                            class="form-control w-50" placeholder="Наз.компании">
+                                            class="form-control w-75" placeholder="Наз.компании">
                                     </div>
-                                    <div class="d-flex justify-content-center mt-1">
-                                        <button class="btn btn-warning w-25">Редактирование</button>
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button class="btn btn-warning">Редактирование</button>
                                     </div>
                                 </form>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
 

@@ -101,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 mt-3 mt-lg-0 col-lg-9 text-light">
+                <div class="col-12 mt-lg-0 col-lg-9 text-light">
                     <div class="box">
                         <div class="box-second pt-lg-4">
                             <!--Btn offcanvas начало-->
@@ -191,11 +191,9 @@
                                         </div>
 
                                         <div class="text-wrap mt-2 px-3 px-lg-5 mt-lg-2">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, numquam
-                                            dignissimos. Quas suscipit recusandae nisi, architecto nesciunt unde
-                                            distinctio quidem ipsam nihil sed repudiandae quos magnam, id dolore
-                                            quisquam dolorem!
+                                            Заказать быстроо и оперативно. у нас самая вкусная еда в городе Дербент
                                         </div>
+
 
                                         <div class="d-flex px-3 pt-3 justify-content-evenly pt-lg-5 flex-wrap">
                                             <div class="bg-warning px-4 py-3 rounded-pill text-dark lead">Быстрая
@@ -216,7 +214,7 @@
                                 <!--Меню начало-->
                                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                                     aria-labelledby="v-pills-profile-tab">
-                                    <div class="div-menu mt-3 m-0 mt-lg-0 ps-lg-4 mb-lg-5">
+                                    <div class="div-menu mt-2  mt-lg-0  mb-lg-5">
 
                                         <!--Карточки с чуду начало-->
                                         <div class="mt-2 mt-lg-0">
@@ -225,8 +223,8 @@
 
                                                 <div class="row row-cols-lg-3">
 
-                                                    <div class="col mt-lg-4">
-                                                        <div class="card border-dark" style=" height: 410px;">
+                                                    <div class="col mt-lg-1 ">
+                                                        <div class="card border-dark" style="height: 410px;">
                                                             <img src="images/chudu.jpg"
                                                                 style="height: 200px; object-fit: cover;"
                                                                 class="card-img-top" alt="...">
@@ -254,10 +252,10 @@
 
                                         <!--Карточки с пицца начало-->
                                         <div>
-                                            <div class="mt-3 mt-lg-0 text-start fs-1 fw-bold">
+                                            <div class="mt-3 mt-lg-2 text-start fs-1 fw-bold">
                                                 Пицца
                                             </div>
-                                            <div class="card-chudu mt-1 mt-lg-0">
+                                            <div class="card-chudu mt-3 mt-lg-0">
 
                                                 <div class="row row-cols-lg-3">
 
@@ -364,9 +362,9 @@
                                                 </div>
                                                 <!--footer Пицца конструктор начало-->
                                                 <button
-                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.616);"
-                                                    class="w-100 d-block border border-0 text-white py-2 mt-2">
-                                                    <div class="d-flex justify-content-center fs-4">
+                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9);"
+                                                    class="w-100 d-block border border-0 text-white py-2 py-lg-1 mt-1 mt-lg-0">
+                                                    <div class="d-flex justify-content-center">
                                                         <span class="fs-4">Собрать пиццу за: 800₽</span>
                                                     </div>
                                                 </button>
@@ -420,8 +418,8 @@
                                                 </div>
                                                 <!--footer конструктор начало-->
                                                 <button
-                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.7);"
-                                                    class="w-100 d-block border border-0 text-white py-2 mt-2">
+                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.8);"
+                                                    class="w-100 d-block border border-0 text-white py-2 py-lg-1 mt-1 mt-lg-0">
                                                     <div class="d-flex justify-content-center">
                                                         <span class="fs-4">Собрать чуду за: 500₽</span>
                                                     </div>
@@ -442,7 +440,7 @@
                                 <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
                                     aria-labelledby="v-pills-settings-tab">
                                     <div class="text-center fs-2 fw-bold">Подтвердите свой заказ</div>
-                                    <div class="div-basket ps-0 ps-lg-4">
+                                    <div class="div-basket ps-lg-4">
                                         <div class="row row row-cols-1 row-cols-lg-3">
 
                                             <div class="col mt-2 mt-lg-4 ms-lg-0">
@@ -462,19 +460,59 @@
                                                                     class="btn fs-3 mb-2">+</button>
                                                             </span>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="col mt-2 mt-lg-4 ms-lg-0">
+                                                <div class="card border-dark" style=" height: 400px;">
+                                                    <img src="images/chudu.jpg"
+                                                        style="height: 200px; object-fit: cover;"
+                                                        class="card-img-top" alt="...">
+                                                    <div class="card-body text-black">
+                                                        <h3 class="card-title text-center">Чуду с зеленью</h3>
+                                                        <p class="card-text">Попробуйте наше вкусное чуду
+                                                            с зеленью со специями</p>
+                                                        <div class="d-flex flex-column">
+                                                            <span>Цена: 600₽</span>
+                                                            <span class="">Кол.во:<button
+                                                                    class="btn fs-3 mb-2">-</button><span
+                                                                    class="border border-secondary px-2 py-1">10</span><button
+                                                                    class="btn fs-3 mb-2">+</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col mt-2 mt-lg-4 ms-lg-0">
+                                                <div class="card border-dark" style=" height: 400px;">
+                                                    <img src="images/chudu.jpg"
+                                                        style="height: 200px; object-fit: cover;"
+                                                        class="card-img-top" alt="...">
+                                                    <div class="card-body text-black">
+                                                        <h3 class="card-title text-center">Чуду с зеленью</h3>
+                                                        <p class="card-text">Попробуйте наше вкусное чуду
+                                                            с зеленью со специями</p>
+                                                        <div class="d-flex flex-column">
+                                                            <span>Цена: 600₽</span>
+                                                            <span class="">Кол.во:<button
+                                                                    class="btn fs-3 mb-2">-</button><span
+                                                                    class="border border-secondary px-2 py-1">10</span><button
+                                                                    class="btn fs-3 mb-2">+</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <!--footer корзина начало-->
-                                    <button style="position: relative; bottom: 0; background: rgba(0, 0, 0, 0.7);"
-                                        class="fixed-bottom  w-100 d-block border border-0 text-white"
+                                    <button style="position: relative; bottom: 0; background: rgba(0, 0, 0, 0.9);"
+                                        class="fixed-bottom pt-2 pt-lg-0 mt-lg-0 mt-2 fs-3 w-100 d-block text-white"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        <div class="d-flex justify-content-center fs-4">
-                                            <span>Купить за: 500₽</span>
-                                        </div>
+                                        Купить за: 500₽
                                     </button>
 
                                     <!-- Modal footer корзина начало -->
