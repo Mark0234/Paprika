@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/public/style.css">
+    <!-- Ajax -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
 
 <body>
@@ -24,7 +29,7 @@
             Панель управления
         </div>
         <div class="text-center">
-            <a href="/login" class="mt-3 btn btn-lg btn-light fs-6" type="submit"><i class="bi bi-arrow-left-circle"></i>
+            <a href="/" class="mt-3 btn btn-lg btn-light fs-6" type="submit"><i class="bi bi-arrow-left-circle"></i>
                 Выйти из панели управления</a>
         </div>
 
@@ -54,7 +59,6 @@
                             <div class="main bg-light p-2 p-lg-4 m-5">
                                 <form action="/main/{{ $main->id }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <h2 class="text-center">Главная</h2>
                                     <div class="d-flex justify-content-center">Логотип компании</div>
                                     <div class="d-flex justify-content-center mt-1">
                                         <input type="file" name="img_main" value="{{ $main->img_main }}"
@@ -77,7 +81,52 @@
 
             </div>
             <div class="tab-pane fade" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
-                Главная
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-lg-12 mt-3">
+
+                        <div class="col" id="main_home">
+                            <div class="main bg-light p-2 p-lg-4 m-5">
+                                <form id="main_home_edit">
+                                    @csrf
+                                    <h2 class="text-center">Главная</h2>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input type="text" id="name" name="name" class="form-control w-75"
+                                            placeholder="Название">
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input type="text" id="slogan" name="slogan" value="" class="form-control w-75"
+                                            placeholder="Слоган">
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input type="file" name="images" value="" class="form-control w-75"
+                                            placeholder="Картинка">
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input type="text" id="description" name="description" value=""
+                                            class="form-control w-75" placeholder="Описание">
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input type="text" id="servis_a" name="servis_a" class="form-control w-75"
+                                            placeholder="Сервис1">
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input type="text" id="servis_b" name="servis_b" class="form-control w-75"
+                                            placeholder="Сервис2">
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input type="text" id="servis_c" name="servis_c" class="form-control w-75"
+                                            placeholder="Сервис3">
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button class="btn btn-warning"
+                                            v-on:click="edit_main_home">Редактировать</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab">
                 Меню
@@ -91,7 +140,27 @@
         </div>
 
     </div>
+
+    <!-- модальное окно при успешном редоктировании -->
+    <button class="d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modaledit"></button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="bg-success py-3 text-center px-3 lead text-white">Редактирование прошло успешно!</div>
+                </div>
+                <div class="modal-footer">
+                    <a href="/" class="btn btn-info text-white">Перейти на главную</a>
+                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal"
+                        aria-label="Close">Остаться</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--модальное окно при успешном редактировании конец -->
     <script src="/public/script.js"></script>
+    <script src="/admin.js"></script>
 </body>
 
 </html>

@@ -29,4 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [MainController::class, 'admin'])->name('admin');
     Route::post('/admin', [MainController::class, 'admin_process']);
     Route::post('/main/{id}', [MainController::class, 'main_process']);
+    Route::get('/main_home', [MainController::class, 'main_home_process']);
+    Route::post('/main_home_edit', [MainController::class, 'main_home_edit']);
 });

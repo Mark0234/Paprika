@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Доставка еды - Паприка</title>
-    <script src="https://unpkg.com/vue@next"></script>
+
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="/public/style.css">
     <meta name="description"
         content="Доставка еды по городу Дербент, частые акции и вкус нашей еды не оставят вас равнодушными!" />
+    <!-- Ajax -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@next"></script>
     <style>
         .w-c {
             width: 50%;
@@ -179,31 +184,34 @@
                                 <!--Главная начало-->
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                                     aria-labelledby="v-pills-home-tab">
-                                    <div class="div-main mt-4 mt-lg-0">
+                                    <div id="main_home" class="div-main d-flex justify-content-center flex-column">
+
                                         <div class="d-flex justify-content-center">
-                                            <span class="fs-1">Паприка Дербент</span>
+                                            <img src="/storage/main_home/{{ $main_home->images }}" alt=""
+                                                width="100px">
                                         </div>
-                                        <p class="text-center mt-1 fs-5">Быстрая доставка еды
+
+                                        <div class="d-flex justify-content-center">
+                                            <span class="fs-1">{{ $main_home->name }}</span>
+                                        </div>
+                                        <p class="text-center mt-1 fs-5">{{ $main_home->slogan }}
                                         </p>
 
-                                        <div class="d-flex justify-content-center">
-                                            <img src="images/pizza.png" alt="" width="100px">
+
+
+                                        <div class="text-wrap mt-2 px-3 px-lg-5 mt-lg-2 text-center">
+                                            {{ $main_home->description }}
                                         </div>
 
-                                        <div class="text-wrap mt-2 px-3 px-lg-5 mt-lg-2">
-                                            Заказать быстроо и оперативно. у нас самая вкусная еда в городе Дербент
-                                        </div>
 
-
-                                        <div class="d-flex px-3 pt-3 justify-content-evenly pt-lg-5 flex-wrap">
-                                            <div class="bg-warning px-4 py-3 rounded-pill text-dark lead">Быстрая
-                                                доставка
+                                        <div class="d-flex mt-1 px-3 pt-3 justify-content-evenly pt-lg-5 flex-wrap">
+                                            <div class="bg-warning px-4 py-3 rounded-pill text-dark lead">
+                                                {{ $main_home->servis_a }}
                                             </div>
                                             <div class="bg-warning px-4 py-3 rounded-pill text-dark lead mt-2 mt-lg-0">
-                                                Режим работы с
-                                                18:00 до 23:00</div>
+                                                {{ $main_home->servis_b }}</div>
                                             <div class="bg-warning px-4 py-3 rounded-pill text-dark lead mt-2 mt-lg-0">
-                                                Самое вкусное
+                                                {{ $main_home->servis_c }}
                                             </div>
                                         </div>
 
