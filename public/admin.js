@@ -50,3 +50,61 @@ const Main_home = {
     },
 };
 Vue.createApp(Main_home).mount("#main_home");
+
+const Main_menu = {
+    data() {
+        return {
+            category: [],
+            add_name: "",
+            error_add_name: "",
+        };
+    },
+    beforeMount() {
+        this.category_all();
+    },
+    methods: {
+        //Добавление в базу
+        addСategory() {
+            event.preventDefault();
+            var addformСategory = new FormData($("#addformСategory")[0]);
+            var prom = this.category;
+            if (this.add_name != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/add_category",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: addformСategory,
+                    success: function (data) {
+                        close_add_category.click();
+                        prom.push({
+                            id: data["id"],
+                            name: data["name"],
+                        });
+                    },
+                });
+            } else {
+                this.error_add_name = "Поле обязательно";
+            }
+        },
+        category_all() {
+            var prom = this.category;
+            $.ajax({
+                type: "GET",
+                url: "/menu_category",
+                method: "get",
+                dataType: "json",
+                success: function (data) {
+                    data.forEach(function (elem) {
+                        prom.push({
+                            id: elem["id"],
+                            name: elem["name"],
+                        });
+                    });
+                },
+            });
+        },
+    },
+};
+Vue.createApp(Main_menu).mount("#main_menu");

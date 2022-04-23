@@ -191,8 +191,10 @@
                                                 width="100px">
                                         </div>
 
-                                        <div class="d-flex justify-content-center">
-                                            <span class="fs-1">{{ $main_home->name }}</span>
+                                        <div class="d-flex justify-content-center mt-2">
+                                            <span
+                                                class="fs-2 fw-bold bg-warning px-4 py-3 rounded-pill text-dark">{{ $main_home->name }}
+                                            </span>
                                         </div>
                                         <p class="text-center mt-1 fs-5">{{ $main_home->slogan }}
                                         </p>
@@ -370,11 +372,9 @@
                                                 </div>
                                                 <!--footer Пицца конструктор начало-->
                                                 <button
-                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9);"
-                                                    class="w-100 d-block border border-0 text-white py-2 py-lg-1 mt-1 mt-lg-0">
-                                                    <div class="d-flex justify-content-center">
-                                                        <span class="fs-4">Собрать пиццу за: 800₽</span>
-                                                    </div>
+                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
+                                                    class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0">
+                                                    Собрать пиццу за: 800₽
                                                 </button>
                                                 <!--footer Пицца конструктор конец-->
                                             </div>
@@ -426,11 +426,9 @@
                                                 </div>
                                                 <!--footer конструктор начало-->
                                                 <button
-                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.8);"
-                                                    class="w-100 d-block border border-0 text-white py-2 py-lg-1 mt-1 mt-lg-0">
-                                                    <div class="d-flex justify-content-center">
-                                                        <span class="fs-4">Собрать чуду за: 500₽</span>
-                                                    </div>
+                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
+                                                    class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0">
+                                                    Собрать чуду за: 600₽
                                                 </button>
                                                 <!--footer конструктор конец-->
                                             </div>
@@ -517,8 +515,9 @@
                                         </div>
                                     </div>
                                     <!--footer корзина начало-->
-                                    <button style="position: relative; bottom: 0; background: rgba(0, 0, 0, 0.9);"
-                                        class="fixed-bottom pt-2 pt-lg-0 mt-lg-0 mt-2 fs-3 w-100 d-block text-white"
+                                    <button
+                                        style="position: relative; bottom: 0; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
+                                        class="fixed-bottom border-0 fs-4 py-2 py-lg-1 mt-2 mt-lg-0  fs-4 w-100 d-block text-white"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         Купить за: 500₽
                                     </button>

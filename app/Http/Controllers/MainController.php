@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Models\MainModel;
 use App\Models\Main_homeModel;
+use App\Models\MenuCategoryModel;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -87,5 +88,23 @@ class MainController extends Controller
 
         return $main_home;
     }
-    
+
+    public function add_category(Request $data)
+    {
+        $valid = $data->validate([
+            'name' => ['required'],
+        ]);
+
+        $category = new MenuCategoryModel(); //Добовление  в базу
+        $category->name = $data->input('name');
+        $category->save();
+
+        $category = new MenuCategoryModel();
+        return $category->latest()->first(); //Вывести последнюю запись с базы
+    }
+
+    public function menu_category() {
+        $category = new MenuCategoryModel();
+        return json_encode($category->all()); //Вывести все как json массив
+    }
 };

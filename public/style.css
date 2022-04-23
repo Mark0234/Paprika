@@ -2,16 +2,16 @@
     box-sizing: border-box;
 }
 .box-main {
-    background: rgba(19, 18, 18, 0.4);
-    box-shadow: 0 25px 45px rgba(212, 198, 10, 0.3); /* Придает тени по краям*/
+    background: rgba(19, 18, 18, 0.5);
+    box-shadow: 0 25px 45px rgba(212, 198, 10, 0.5); /* Придает тени по краям*/
     border: 1px solid rgba(228, 213, 7, 0.1);
     border-right: 1px solid rgba(190, 236, 21, 0.1); /* тень справа*/
     border-radius: 7px; /* округление диалогового окна*/
     z-index: 10; /* увеличение степени важности над другими блоками*/
 }
 .box-second {
-    background: rgba(19, 18, 18, 0.4);
-    box-shadow: 0 25px 45px rgba(212, 198, 10, 0.3); /* Придает тени по краям*/
+    background: rgba(19, 18, 18, 0.5);
+    box-shadow: 0 25px 45px rgba(212, 198, 10, 0.5); /* Придает тени по краям*/
     border: 1px solid rgba(228, 213, 7, 0.1);
     border-right: 1px solid rgba(190, 236, 21, 0.1); /* тень справа*/
     border-radius: 7px; /* округление диалогового окна*/
@@ -60,10 +60,10 @@
     }
     .div-basket {
         overflow: auto;
-        height: 78vh;
+        height: 79vh;
         -ms-overflow-style: none;
         scrollbar-width: none;
-        padding: 5%;
+        padding: 4%;
     }
     .const-pizza {
         overflow: auto;
@@ -74,7 +74,7 @@
     }
     .const-chudu {
         overflow: auto;
-        height: 70vh;
+        height: 71vh;
         -ms-overflow-style: none;
         scrollbar-width: none;
         padding: 4%;
@@ -104,7 +104,7 @@
     }
     .div-basket {
         overflow: auto;
-        height: 78vh;
+        height: 77vh;
         -ms-overflow-style: none;
         scrollbar-width: none;
         padding: 4%;

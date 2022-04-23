@@ -31,4 +31,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/main/{id}', [MainController::class, 'main_process']);
     Route::get('/main_home', [MainController::class, 'main_home_process']);
     Route::post('/main_home_edit', [MainController::class, 'main_home_edit']);
+    Route::post('/add_category', [MainController::class, 'add_category']);
+    Route::get('/menu_category', [MainController::class, 'menu_category']);
 });
