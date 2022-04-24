@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\MainModel;
 use App\Models\Main_homeModel;
 use App\Models\MenuCategoryModel;
+use App\Models\MenuCategoryCardModel;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -106,5 +107,53 @@ class MainController extends Controller
     public function menu_category() {
         $category = new MenuCategoryModel();
         return json_encode($category->all()); //Вывести все как json массив
+    }
+
+    public function edit_category(Request $data, $id)
+    {
+        $valid = $data->validate([
+            'name' => ['required'],
+        ]);
+
+        $category = MenuCategoryModel::find($id); //Редактирование  в базе
+        $category->name = $data->input('name');
+        $category->save();
+    }
+
+    public function delete_category($id)
+    {
+         MenuCategoryModel::find($id)->delete(); //Удаление  из базу
+    }
+
+    public function add_category_card(Request $data, $id)
+    {
+        $valid = $data->validate([
+            'img' => ['required', ],
+            'name' => ['required'],
+            'description' => ['required'],
+            'price' => ['required'],
+        ]);
+
+        $card = new MenuCategoryCardModel(); //Добовление  в базу
+        $card->type = $id;
+        $file = $data->file('img');
+        $upload_folder = 'public/card';
+        $filename = $file->getClientOriginalName();
+        $card->img = $filename;
+        Storage::putFileAs($upload_folder, $file, $filename);
+
+        $card->name = $data->input('name');
+        $card->description = $data->input('description');
+        $card->price = $data->input('price');
+        $card->save();
+
+        $card = new MenuCategoryCardModel();
+        return $card->latest()->first();  //Вывести последнюю запись с базы
+    }
+
+    public function menu_category_card()
+    {
+        $category_card = new MenuCategoryCardModel();
+        return $category_card->all(); //Вывести все записи с базы
     }
 };

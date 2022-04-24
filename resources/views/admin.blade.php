@@ -136,7 +136,7 @@
                     </div>
                     <div class="row row-cols-1 row-cols-lg-12 mt-3">
 
-                        <div v-for="item in category" class="col mt-2">
+                        <div v-for="(item, ib) in category" :key='item' class="col mt-2">
 
                             <div class="accordion" :id="'accordionExample' + item.id"> {{-- Присвоение каждому свой id --}}
                                 <div class="accordion-item">
@@ -146,9 +146,12 @@
                                             :aria-controls="'collapse' + item.id">
                                             @{{ item.name }}
                                         </div>
-                                        <button class="btn btn-warning ms-auto px-3"><i
+                                        <button class="btn btn-warning ms-auto px-3" data-bs-toggle="modal"
+                                            :data-bs-target="'#exampleModalcategoryedit' + item.id"><i
                                                 class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-danger px-3"><i class="bi bi-basket"></i></button>
+                                        <button class="btn btn-danger px-3" data-bs-toggle="modal"
+                                            :data-bs-target="'#exampleModalcategorydelete' + item.id"><i
+                                                class="bi bi-basket"></i></button>
                                     </h2>
                                     <div :id="'collapse' + item.id" class="accordion-collapse collapse"
                                         :aria-labelledby="'heading' + item.id" data-bs-parent="#accordionExample">
@@ -156,25 +159,30 @@
                                             <div class="bg-light">
                                                 <div class="d-flex">
                                                     <button
-                                                        class="btn btn-success ms-auto w-100 text-white d-flex justify-content-center"><i
-                                                            class="bi bi-plus-circle me-2"></i> Добавить</button>
+                                                        class="btn btn-success ms-auto w-100 text-white d-flex justify-content-center"
+                                                        data-bs-toggle="modal"
+                                                        :data-bs-target="'#exampleModaladdcard' + item.id"><i
+                                                            class="bi bi-plus-circle me-2"></i>
+                                                        Добавить</button>
                                                 </div>
                                             </div>
                                             <div class="container">
                                                 <div class="row row-cols-lg-3 row-cols-1">
 
-                                                    <div class="col mt-3">
+                                                    <div v-for="prom in card.filter(citem => citem.type.match(item.id))"
+                                                        class="col mt-3">
 
                                                         <div class="card border-secondary bg-light"
                                                             style="height: 410px;">
-                                                            <img src="images/chudu.jpg"
+                                                            <img :src="'/storage/card/'+prom.img" {{-- вывод картинки в шаблон vue3 --}}
                                                                 style="height: 200px; object-fit: cover;"
                                                                 class="card-img-top" alt="...">
                                                             <div class="card-body text-black">
-                                                                <h3 class="card-title text-center">Чуду с зеленью</h3>
-                                                                <p class="card-text">Попробуйте наше вкусное чуду
-                                                                    с зеленью со специями</p>
-                                                                <p class="text-start">Цена: 500₽</p>
+                                                                <h3 class="card-title text-center">
+                                                                    @{{ prom.name }}</h3>
+                                                                <p class="card-text">@{{ prom.description }}</p>
+                                                                <p class="text-start">Цена: @{{ prom.price }}₽
+                                                                </p>
                                                                 <div class="d-flex">
                                                                     <button
                                                                         class="btn btn-warning w-50 text-dark me-1"><i
@@ -187,53 +195,144 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="col mt-3">
-
-                                                        <div class="card border-dark" style="height: 410px;">
-                                                            <img src="images/chudu.jpg"
-                                                                style="height: 200px; object-fit: cover;"
-                                                                class="card-img-top" alt="...">
-                                                            <div class="card-body text-black">
-                                                                <h3 class="card-title text-center">Чуду с зеленью</h3>
-                                                                <p class="card-text">Попробуйте наше вкусное чуду
-                                                                    с зеленью со специями</p>
-                                                                <p class="text-start">Цена: 500₽</p>
-                                                                <div class="d-flex justify-content-center">
-                                                                    <button class="btn btn-warning"><i
-                                                                            class="bi bi-minecart"></i>
-                                                                        В корзину</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col mt-3">
-
-                                                        <div class="card border-dark" style="height: 410px;">
-                                                            <img src="images/chudu.jpg"
-                                                                style="height: 200px; object-fit: cover;"
-                                                                class="card-img-top" alt="...">
-                                                            <div class="card-body text-black">
-                                                                <h3 class="card-title text-center">Чуду с зеленью</h3>
-                                                                <p class="card-text">Попробуйте наше вкусное чуду
-                                                                    с зеленью со специями</p>
-                                                                <p class="text-start">Цена: 500₽</p>
-                                                                <div class="d-flex justify-content-center">
-                                                                    <button class="btn btn-warning"><i
-                                                                            class="bi bi-minecart"></i>
-                                                                        В корзину</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Модальное окно добовления карточки категории в меню -->
+                            <div class="modal fade" :id="'exampleModaladdcard' + item.id" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Добавить карточку</h5>
+                                            <button :id="'close_add_card' + item.id" type="button"
+                                                class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form :id="'addformCategory_card' + item.id">
+                                                @csrf
+                                                <input type="file" name="img" class="form-control"
+                                                    :id="'add_card_img' + item.id" placeholder="name@example.com">
+
+                                                <div class="text-danger mb-3">
+                                                    @{{ error_add_card_img }}
+                                                </div>
+
+                                                <div class="form-floating mt-2">
+                                                    <input type="text" v-model='add_card_name' name="name"
+                                                        class="form-control" id="floatingInput"
+                                                        placeholder="name@example.com">
+                                                    <label for="floatingInput">Название</label>
+                                                </div>
+                                                <div class="text-danger mb-3">
+                                                    @{{ error_add_card_name }}
+                                                </div>
+
+                                                <div class="form-floating">
+                                                    <input type="text" v-model='add_card_description' name="description"
+                                                        class="form-control" id="floatingInput"
+                                                        placeholder="name@example.com">
+                                                    <label for="floatingInput">Описание</label>
+                                                </div>
+                                                <div class="text-danger mb-3">
+                                                    @{{ error_add_card_description }}
+                                                </div>
+
+                                                <div class="form-floating">
+                                                    <input type="text" v-model='add_card_price' name="price"
+                                                        class="form-control" id="floatingInput"
+                                                        placeholder="name@example.com">
+                                                    <label for="floatingInput">Цена</label>
+                                                </div>
+                                                <div class="text-danger mb-3">
+                                                    @{{ error_add_card_price }}
+                                                </div>
+
+                                                <button type="button" class="btn btn-primary text-white"
+                                                    v-on:click="addСategory_card(ib)">Добавить</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Назад</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Модальное окно добовления карточки категории в меню конец-->
+
+                            <!-- Модальное окно редактирования категории в меню -->
+                            <div class="modal fade" :id="'exampleModalcategoryedit' + item.id" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Редактировать категорию
+                                            </h5>
+                                            <button id="close_edit_category" type="button" class="btn-close"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="editformСategory">
+                                                @csrf
+                                                <div class="form-floating">
+                                                    <input v-model="item.name" type="text" name="name"
+                                                        class="form-control" id="floatingInput"
+                                                        placeholder="name@example.com">
+                                                    <label for="floatingInput">Название</label>
+                                                </div>
+                                                <div class="text-danger mb-3">
+                                                    @{{ error_edit_name }}
+                                                </div>
+                                                <button type="button" class="btn btn-primary text-white"
+                                                    v-on:click="editСategory(ib)">Изменить</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Назад</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Модальное окно редактирования категории в меню конец -->
+
+
+                            <!-- Модальное окно удалении категории в меню -->
+                            <div class="modal fade" :id="'exampleModalcategorydelete' + item.id" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                            </h5>
+                                            <button :id="'close_delete_category' + item.id" type="button"
+                                                class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3 class="text-center">Вы действительно хотите удалить категорию?</h3>
+                                            <div class="d-flex justify-content-center mt-3">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Назад</button>
+                                                <button class="btn btn-danger ms-2"
+                                                    v-on:click='deleteСategory(ib)'>Удалить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Модальное окно Удалении категории в меню конец -->
+
                         </div>
+
 
                     </div>
                     <!-- Модальное окно добовления категории в меню -->
@@ -270,6 +369,10 @@
                         </div>
                     </div>
                     <!-- Модальное окно добовления категории в меню конец-->
+
+
+
+
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-constructor" role="tabpanel" aria-labelledby="nav-constructor-tab">

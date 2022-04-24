@@ -33,4 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/main_home_edit', [MainController::class, 'main_home_edit']);
     Route::post('/add_category', [MainController::class, 'add_category']);
     Route::get('/menu_category', [MainController::class, 'menu_category']);
+    Route::post('/edit_category/{id}', [MainController::class, 'edit_category']);
+    Route::get('/delete_category/{id}', [MainController::class, 'delete_category']);
+    Route::post('/add_category_card/{id}', [MainController::class, 'add_category_card']);
+    Route::get('/menu_category_card', [MainController::class, 'menu_category_card']);
 });
