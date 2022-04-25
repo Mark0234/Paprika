@@ -225,73 +225,42 @@
                                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                                     aria-labelledby="v-pills-profile-tab">
                                     <div class="div-menu mt-2  mt-lg-0  mb-lg-5">
-
                                         <!--Карточки с чуду начало-->
-                                        <div class="mt-2 mt-lg-0">
-                                            <div class="text-start fs-1 fw-bold">Чуду</div>
-                                            <div class="card-chudu mt-3">
+                                        @foreach ($category as $item)
+                                            <div class="mt-2 mt-lg-0">
+                                                <div class="text-start fs-1 fw-bold">{{ $item->name }}</div>
+                                                <div class="card-chudu mt-3">
 
-                                                <div class="row row-cols-lg-3">
-
-                                                    <div class="col mt-lg-1 ">
-                                                        <div class="card border-dark" style="height: 410px;">
-                                                            <img src="images/chudu.jpg"
-                                                                style="height: 200px; object-fit: cover;"
-                                                                class="card-img-top" alt="...">
-                                                            <div class="card-body text-black">
-                                                                <h3 class="card-title text-center">Чуду с зеленью</h3>
-                                                                <p class="card-text">Попробуйте наше вкусное чуду
-                                                                    с зеленью со специями</p>
-                                                                <p class="text-start">Цена: 500₽</p>
-                                                                <div class="d-flex justify-content-center">
-                                                                    <button class="btn btn-warning"><i
-                                                                            class="bi bi-minecart"></i>
-                                                                        В корзину</button>
+                                                    <div class="row row-cols-lg-3">
+                                                        @foreach ($category_card->where('type', $item->id) as $item_card)
+                                                            <div class="col mt-lg-1 ">
+                                                                <div class="card border-dark" style="height: 410px;">
+                                                                    <img src="/storage/card/{{ $item_card->img }}"
+                                                                        style="height: 200px; object-fit: cover;"
+                                                                        class="card-img-top" alt="...">
+                                                                    <div class="card-body text-black">
+                                                                        <h3 class="card-title text-center">
+                                                                            {{ $item_card->name }}
+                                                                        </h3>
+                                                                        <p class="card-text">
+                                                                            {{ $item_card->description }}</p>
+                                                                        <p class="text-start">Цена:
+                                                                            {{ $item_card->price }}₽</p>
+                                                                        <div class="d-flex justify-content-center">
+                                                                            <button class="btn btn-warning"><i
+                                                                                    class="bi bi-minecart"></i>
+                                                                                В корзину</button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        @endforeach
                                                     </div>
-
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endforeach
                                         <!--Карточки с чуду конец-->
 
-
-
-
-                                        <!--Карточки с пицца начало-->
-                                        <div>
-                                            <div class="mt-3 mt-lg-2 text-start fs-1 fw-bold">
-                                                Пицца
-                                            </div>
-                                            <div class="card-chudu mt-3 mt-lg-0">
-
-                                                <div class="row row-cols-lg-3">
-
-                                                    <div class="col mt-lg-4">
-                                                        <div class="card border-dark" style=" height: 410px;">
-                                                            <img src="images/пицца.jpg"
-                                                                style="height: 200px; object-fit: cover;"
-                                                                class="card-img-top" alt="...">
-                                                            <div class="card-body text-black">
-                                                                <h3 class="card-title text-center">Чуду с зеленью</h3>
-                                                                <p class="card-text">Попробуйте наше вкусное чуду
-                                                                    с зеленью со специями</p>
-                                                                <p class="text-start">Цена: 500₽</p>
-                                                                <div class="d-flex justify-content-center">
-                                                                    <button class="btn btn-warning"><i
-                                                                            class="bi bi-minecart"></i>
-                                                                        В корзину</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Карточки с пицца конец-->
 
 
                                     </div>

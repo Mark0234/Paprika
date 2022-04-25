@@ -184,15 +184,130 @@
                                                                 <p class="text-start">Цена: @{{ prom.price }}₽
                                                                 </p>
                                                                 <div class="d-flex">
-                                                                    <button
+                                                                    <button data-bs-toggle="modal"
+                                                                        :data-bs-target="'#editcard' + prom.id"
                                                                         class="btn btn-warning w-50 text-dark me-1"><i
                                                                             class="bi bi-basket"></i> Ред.</button>
-                                                                    <button
+                                                                    <button data-bs-toggle="modal"
+                                                                        :data-bs-target="'#deletecard'+ prom.id"
                                                                         class="btn btn-danger text-light w-50 me-1"><i
                                                                             class="bi bi-basket"></i> Удалить</button>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <!-- Модальное окно удаления карточки категории в меню -->
+                                                        <div class="modal fade" :id="'deletecard' + prom.id"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button :id="'closedeletecard' + prom.id"
+                                                                            type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <h3 class="text-center">Вы действительно
+                                                                            хотите удалить категорию?</h3>
+                                                                        <div class="d-flex justify-content-center mt-3">
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">Назад</button>
+                                                                            <button class="btn btn-danger ms-2"
+                                                                                v-on:click='deleteСategorycard(prom.id)'>Удалить</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Назад</button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Модальное окно удаления карточки категории в меню конец -->
+
+                                                        <!-- Модальное окно редактирования карточки категории в меню -->
+                                                        <div class="modal fade" :id="'editcard' + prom.id"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="exampleModalLabel">Редактировать
+                                                                            Карточку
+                                                                        </h5>
+                                                                        <button :id="'close_edit_card' + prom.id"
+                                                                            type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form :id="'editformCategory_card' + prom.id">
+                                                                            @csrf
+                                                                            <input type="file" name="img"
+                                                                                class="form-control"
+                                                                                :id="'edit_card_img' + prom.id"
+                                                                                placeholder="name@example.com">
+
+                                                                            <div class="text-danger mb-3">
+                                                                                @{{ error_edit_card_img }}
+                                                                            </div>
+
+                                                                            <div class="form-floating mt-2">
+                                                                                <input type="text" v-model='prom.name'
+                                                                                    name="name" class="form-control"
+                                                                                    id="floatingInput"
+                                                                                    placeholder="name@example.com">
+                                                                                <label
+                                                                                    for="floatingInput">Название</label>
+                                                                            </div>
+                                                                            <div class="text-danger mb-3">
+                                                                                @{{ error_edit_card_name }}
+                                                                            </div>
+
+                                                                            <div class="form-floating">
+                                                                                <input type="text"
+                                                                                    v-model='prom.description'
+                                                                                    name="description"
+                                                                                    class="form-control"
+                                                                                    id="floatingInput"
+                                                                                    placeholder="name@example.com">
+                                                                                <label
+                                                                                    for="floatingInput">Описание</label>
+                                                                            </div>
+                                                                            <div class="text-danger mb-3">
+                                                                                @{{ error_edit_card_description }}
+                                                                            </div>
+
+                                                                            <div class="form-floating">
+                                                                                <input type="text" v-model='prom.price'
+                                                                                    name="price" class="form-control"
+                                                                                    id="floatingInput"
+                                                                                    placeholder="name@example.com">
+                                                                                <label for="floatingInput">Цена</label>
+                                                                            </div>
+                                                                            <div class="text-danger mb-3">
+                                                                                @{{ error_edit_card_price }}
+                                                                            </div>
+
+                                                                            <button type="button"
+                                                                                class="btn btn-primary text-white"
+                                                                                v-on:click="editСategory_card(prom.id)">Изменить</button>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Назад</button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Модальное окно редактирования карточки категории в меню конец -->
 
                                                     </div>
                                                 </div>
@@ -201,6 +316,10 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+
 
                             <!-- Модальное окно добовления карточки категории в меню -->
                             <div class="modal fade" :id="'exampleModaladdcard' + item.id" tabindex="-1"

@@ -62,12 +62,16 @@ const Main_menu = {
             error_edit_name: "",
             add_card_img: "",
             error_add_card_img: "",
+            error_edit_card_img: "",
             add_card_name: "",
             error_add_card_name: "",
+            error_edit_card_name: "",
             add_card_description: "",
             error_add_card_description: "",
+            error_edit_card_description: "",
             add_card_price: "",
             error_add_card_price: "",
+            error_edit_card_price: "",
         };
     },
     beforeMount() {
@@ -245,6 +249,69 @@ const Main_menu = {
                         });
                     });
                 },
+            });
+        },
+
+        //редактирование карточек через ajax
+        editСategory_card(sas) {
+            event.preventDefault(); // Запрещает обновляться странице . только для формы
+            this.card.forEach(function (e_item) {
+                if (e_item.id == sas) {
+                    var editformCategory_card = new FormData(
+                        $(`#editformCategory_card${e_item.id}`)[0]
+                    );
+                    if (e_item.name != "") {
+                        if (e_item.description != "") {
+                            if (e_item.price != "") {
+                                $.ajax({
+                                    type: "POST",
+                                    url: `/edit_category_card/${e_item.id}`,
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    data: editformCategory_card,
+                                    success: function (data) {
+                                        document
+                                            .getElementById(
+                                                `close_edit_card${e_item.id}`
+                                            )
+                                            .click();
+                                        e_item.img = data;
+                                    },
+                                });
+                            } else {
+                                this.error_edit_price = "Поле обязательно";
+                            }
+                        } else {
+                            this.error_edit_description = "Поле обязательно";
+                        }
+                    } else {
+                        this.error_edit_name = "Поле обязательно";
+                    }
+                }
+            });
+        },
+
+        deleteСategorycard(sas) {
+            cards = this.card;
+            this.card.forEach(function (e_item, $key) {
+                if (e_item.id == sas) {
+                    var prom = e_item.id;
+                    $.ajax({
+                        type: "GET",
+                        url: `/delete_category_card/${e_item.id}`,
+                        method: "get",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            cards.splice($key, 1);
+                            document
+                                .getElementById(`closedeletecard${e_item.id}`)
+                                .click();
+                        },
+                    });
+                }
             });
         },
     },

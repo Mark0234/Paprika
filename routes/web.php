@@ -37,4 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/delete_category/{id}', [MainController::class, 'delete_category']);
     Route::post('/add_category_card/{id}', [MainController::class, 'add_category_card']);
     Route::get('/menu_category_card', [MainController::class, 'menu_category_card']);
+    Route::post('/edit_category_card/{id}', [MainController::class, 'edit_category_card']);
+    Route::get('/delete_category_card/{id}', [MainController::class, 'delete_category_card']);
 });

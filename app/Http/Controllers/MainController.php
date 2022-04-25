@@ -15,7 +15,9 @@ class MainController extends Controller
     {
         $main = MainModel::first();
         $main_home = Main_homeModel::first(); //Пдключаем модель
-        return view('welcome',['main' => $main, 'main_home' => $main_home]);
+        $category = MenuCategoryModel::all();
+        $category_card = MenuCategoryCardModel::all();
+        return view('welcome',['main' => $main, 'main_home' => $main_home,'category' => $category,'category_card' => $category_card]);
     }
 
     public function admin()
@@ -119,10 +121,11 @@ class MainController extends Controller
         $category->name = $data->input('name');
         $category->save();
     }
-
+    //удаление категории
     public function delete_category($id)
     {
-         MenuCategoryModel::find($id)->delete(); //Удаление  из базу
+        MenuCategoryCardModel::where('type', '=', $id)->delete(); //удаление сначала карточек а потом категории
+        MenuCategoryModel::find($id)->delete(); //Удаление  категории
     }
 
     public function add_category_card(Request $data, $id)
@@ -150,10 +153,42 @@ class MainController extends Controller
         $card = new MenuCategoryCardModel();
         return $card->latest()->first();  //Вывести последнюю запись с базы
     }
-
+//вывод в шаблон админки
     public function menu_category_card()
     {
         $category_card = new MenuCategoryCardModel();
         return $category_card->all(); //Вывести все записи с базы
+    }
+
+        // редактирование карточки в категории
+    public function edit_category_card(Request $data, $id)
+    {
+        $valid = $data->validate([
+            'name' => ['required'],
+            'description' => ['required'],
+            'price' => ['required'],
+        ]);
+
+        $category = MenuCategoryCardModel::find($id); //Редактирование  в базе
+        if(!empty($data->img)){
+            $file = $data->file('img');
+            $upload_folder = 'public/card';
+            $filename = $file->getClientOriginalName();
+            Storage::delete($upload_folder .'/'. $category->img);
+            $category->img = $filename;
+            Storage::putFileAs($upload_folder, $file, $filename);   //редактирование фото
+        }
+        $category->name = $data->input('name');
+        $category->description = $data->input('description');
+        $category->price = $data->input('price');
+        $category->save();
+
+        $categoryImg = MenuCategoryCardModel::latest()->first()->img;
+        return $categoryImg;
+    }
+
+    public function delete_category_card($id)
+    {
+        MenuCategoryCardModel::find($id)->delete(); //Удаление  категории
     }
 };
