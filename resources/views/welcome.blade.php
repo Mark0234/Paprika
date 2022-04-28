@@ -57,14 +57,14 @@
 </head>
 
 <body>
-    <div class="m-0 bg-c">
+    <div class="m-0 bg-c" id="main">
         <div class="container-fluid pt-lg-2">
             <div class="row row-cols-1 row-cols-lg-2 pt-lg-2">
                 <div class="col col-lg-3 text-light">
                     <div class="box">
                         <div class="box-main pt-lg-4">
                             <div class="d-flex justify-content-center">
-                                <img src="/public/storage/folder/{{ $main->img_main }}" alt="" width="100px">
+                                <img src="/public/storage/folder/{{ $main->img_main }}" alt="" style="width: 100px">
                             </div>
                             <h3 class="text-paprika text-center mt-lg-1">{{ $main->name_main }}</h3>
                             <div style="background: rgba(0, 0, 0, 0.616);" class="d-flex justify-content-center">
@@ -184,11 +184,11 @@
                                 <!--Главная начало-->
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                                     aria-labelledby="v-pills-home-tab">
-                                    <div id="main_home" class="div-main d-flex justify-content-center flex-column">
+                                    <div class="div-main d-flex justify-content-center flex-column">
 
                                         <div class="d-flex justify-content-center">
                                             <img src="/storage/main_home/{{ $main_home->images }}" alt=""
-                                                width="100px">
+                                                style="width: 150px">
                                         </div>
 
                                         <div class="d-flex justify-content-center mt-2">
@@ -207,12 +207,12 @@
 
 
                                         <div class="d-flex mt-1 px-3 pt-3 justify-content-evenly pt-lg-5 flex-wrap">
-                                            <div class="bg-warning px-4 py-3 rounded-pill text-dark lead">
+                                            <div class="bg-dark px-4 py-3 rounded-pill text-light lead">
                                                 {{ $main_home->servis_a }}
                                             </div>
-                                            <div class="bg-warning px-4 py-3 rounded-pill text-dark lead mt-2 mt-lg-0">
+                                            <div class="bg-dark px-4 py-3 rounded-pill text-light lead mt-2 mt-lg-0">
                                                 {{ $main_home->servis_b }}</div>
-                                            <div class="bg-warning px-4 py-3 rounded-pill text-dark lead mt-2 mt-lg-0">
+                                            <div class="bg-dark px-4 py-3 rounded-pill text-light lead mt-2 mt-lg-0">
                                                 {{ $main_home->servis_c }}
                                             </div>
                                         </div>
@@ -234,7 +234,8 @@
                                                     <div class="row row-cols-lg-3">
                                                         @foreach ($category_card->where('type', $item->id) as $item_card)
                                                             <div class="col mt-lg-1 ">
-                                                                <div class="card border-dark" style="height: 410px;">
+                                                                <div class="card border-0 rounded-3"
+                                                                    style="height: 410px;">
                                                                     <img src="/storage/card/{{ $item_card->img }}"
                                                                         style="height: 200px; object-fit: cover;"
                                                                         class="card-img-top" alt="...">
@@ -247,7 +248,9 @@
                                                                         <p class="text-start">Цена:
                                                                             {{ $item_card->price }}₽</p>
                                                                         <div class="d-flex justify-content-center">
-                                                                            <button class="btn btn-warning"><i
+                                                                            <button id="card{{ $item_card->id }}"
+                                                                                v-on:click="addbasket('{{ $item_card->id }}')"
+                                                                                class="btn btn-warning text-dark"><i
                                                                                     class="bi bi-minecart"></i>
                                                                                 В корзину</button>
                                                                         </div>
@@ -304,9 +307,8 @@
                                                         <div class="col">
                                                             <div class="d-flex flex-column justify-content-center">
                                                                 <div>
-                                                                    <img src="images/pizza2.png" alt=""
-                                                                        class="mx-auto d-block" width="300px"
-                                                                        height="300px">
+                                                                    <img src="/images/pizza2.png" alt=""
+                                                                        class="mx-auto d-block" style="width: 200px">
                                                                 </div>
 
                                                                 <div class="text-center">
@@ -359,8 +361,7 @@
                                                             <div class="d-flex flex-column justify-content-center">
                                                                 <div>
                                                                     <img src="images/chudu111.jpg" alt=""
-                                                                        class="mx-auto d-block" width="300px"
-                                                                        height="300px">
+                                                                        class="mx-auto d-block" style="width: 200px">
                                                                 </div>
 
                                                                 <div class="text-center">
@@ -418,64 +419,33 @@
                                     <div class="div-basket ps-lg-4">
                                         <div class="row row row-cols-1 row-cols-lg-3">
 
-                                            <div class="col mt-2 mt-lg-4 ms-lg-0">
-                                                <div class="card border-dark" style=" height: 400px;">
-                                                    <img src="images/chudu.jpg"
+                                            <div :key='item' v-for="(item ,ib) in card"
+                                                class="col mt-2 mt-lg-4 ms-lg-0">
+                                                <div class="card border-0 rounded-3" style=" height: 400px;">
+                                                    <img :src="'/storage/card/' + item.img"
                                                         style="height: 200px; object-fit: cover;"
                                                         class="card-img-top" alt="...">
                                                     <div class="card-body text-black">
-                                                        <h3 class="card-title text-center">Чуду с зеленью</h3>
-                                                        <p class="card-text">Попробуйте наше вкусное чуду
-                                                            с зеленью со специями</p>
+                                                        <h3 class="card-title text-center">@{{ item.name }}
+                                                        </h3>
+                                                        <p class="card-text">@{{ item.description }}</p>
                                                         <div class="d-flex flex-column">
-                                                            <span>Цена: 600₽</span>
-                                                            <span class="">Кол.во:<button
-                                                                    class="btn fs-3 mb-2">-</button><span
-                                                                    class="border border-secondary px-2 py-1">10</span><button
-                                                                    class="btn fs-3 mb-2">+</button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col mt-2 mt-lg-4 ms-lg-0">
-                                                <div class="card border-dark" style=" height: 400px;">
-                                                    <img src="images/chudu.jpg"
-                                                        style="height: 200px; object-fit: cover;"
-                                                        class="card-img-top" alt="...">
-                                                    <div class="card-body text-black">
-                                                        <h3 class="card-title text-center">Чуду с зеленью</h3>
-                                                        <p class="card-text">Попробуйте наше вкусное чуду
-                                                            с зеленью со специями</p>
-                                                        <div class="d-flex flex-column">
-                                                            <span>Цена: 600₽</span>
-                                                            <span class="">Кол.во:<button
-                                                                    class="btn fs-3 mb-2">-</button><span
-                                                                    class="border border-secondary px-2 py-1">10</span><button
-                                                                    class="btn fs-3 mb-2">+</button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col mt-2 mt-lg-4 ms-lg-0">
-                                                <div class="card border-dark" style=" height: 400px;">
-                                                    <img src="images/chudu.jpg"
-                                                        style="height: 200px; object-fit: cover;"
-                                                        class="card-img-top" alt="...">
-                                                    <div class="card-body text-black">
-                                                        <h3 class="card-title text-center">Чуду с зеленью</h3>
-                                                        <p class="card-text">Попробуйте наше вкусное чуду
-                                                            с зеленью со специями</p>
-                                                        <div class="d-flex flex-column">
-                                                            <span>Цена: 600₽</span>
-                                                            <span class="">Кол.во:<button
-                                                                    class="btn fs-3 mb-2">-</button><span
-                                                                    class="border border-secondary px-2 py-1">10</span><button
-                                                                    class="btn fs-3 mb-2">+</button>
-                                                            </span>
+                                                            <span>Цена: @{{ item.price }}₽</span>
+                                                            <div class="d-flex">
+                                                                <span class="">Кол.во:
+                                                                    <button v-on:click="minus(item.id)" class="btn fs-3 mb-2">
+                                                                        -
+                                                                    </button>
+                                                                    <span class="border border-secondary px-2 py-1">
+                                                                        @{{ item.colvo }}
+                                                                    </span>
+                                                                    <button v-on:click="plus(item.id)" class="btn fs-3 mb-2">
+                                                                        +
+                                                                    </button>
+                                                                </span>
+                                                                <button v-on:click="delcard(ib)"
+                                                                    class="btn text-danger">Удалить</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -677,6 +647,7 @@
             btnClose_canvas.click()
         }
     </script>
+    <script src="/basket.js"></script>
 </body>
 
 </html>

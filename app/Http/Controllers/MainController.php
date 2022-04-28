@@ -7,6 +7,7 @@ use App\Models\MainModel;
 use App\Models\Main_homeModel;
 use App\Models\MenuCategoryModel;
 use App\Models\MenuCategoryCardModel;
+use App\Models\BasketModel;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -190,5 +191,31 @@ class MainController extends Controller
     public function delete_category_card($id)
     {
         MenuCategoryCardModel::find($id)->delete(); //Удаление  категории
+    }
+
+    public function card_basket($id)
+    {
+        $card_basket = MenuCategoryCardModel::find($id);
+        return $card_basket;
+    }
+
+    public function add_basket($id) {
+        $ip = $_SERVER['REMOTE_ADDR'];
+
+        $basket = new BasketModel();
+        $basket->user = $ip;
+        $basket->product = $id;
+        $basket->colvo = 1;
+        $basket->save();
+    }
+
+    public function all_card() {
+        $basket = BasketModel::where('user', '=', $_SERVER['REMOTE_ADDR'])->get();
+        return $basket;
+    }
+
+    public function all_product() {
+        $product = MenuCategoryCardModel::all();
+        return $product;
     }
 };

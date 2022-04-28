@@ -21,6 +21,12 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/check_tel/{tel}', [AuthController::class, 'check_tel']);
 Route::post('/login', [AuthController::class, 'login_process']);
 Route::post('/register', [AuthController::class, 'register_process']);
+Route::get('/add_basket/{id}', [MainController::class, 'add_basket']);
+Route::get('/all_card', [MainController::class, 'all_card']);
+Route::get('/all_product', [MainController::class, 'all_product']);
+Route::get('/card_basket/{id}', [MainController::class, 'card_basket']);
+
+
 
 
 

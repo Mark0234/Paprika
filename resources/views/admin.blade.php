@@ -174,7 +174,7 @@
 
                                                         <div class="card border-secondary bg-light"
                                                             style="height: 410px;">
-                                                            <img :src="'/storage/card/'+prom.img" {{-- вывод картинки в шаблон vue3 --}}
+                                                            <img :src="'/storage/card/' + prom.img" {{-- вывод картинки в шаблон vue3 --}}
                                                                 style="height: 200px; object-fit: cover;"
                                                                 class="card-img-top" alt="...">
                                                             <div class="card-body text-black">
@@ -189,7 +189,7 @@
                                                                         class="btn btn-warning w-50 text-dark me-1"><i
                                                                             class="bi bi-basket"></i> Ред.</button>
                                                                     <button data-bs-toggle="modal"
-                                                                        :data-bs-target="'#deletecard'+ prom.id"
+                                                                        :data-bs-target="'#deletecard' + prom.id"
                                                                         class="btn btn-danger text-light w-50 me-1"><i
                                                                             class="bi bi-basket"></i> Удалить</button>
                                                                 </div>
