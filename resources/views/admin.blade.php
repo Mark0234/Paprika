@@ -43,9 +43,9 @@
                     type="button" role="tab" aria-controls="nav-menu" aria-selected="false">Меню</button>
                 <button class="nav-link" id="nav-constructor-tab" data-bs-toggle="tab"
                     data-bs-target="#nav-constructor" type="button" role="tab" aria-controls="nav-constructor"
-                    aria-selected="false">Конструктор</button>
+                    aria-selected="false">Конструктор пиццы</button>
                 <button class="nav-link" id="nav-basket-tab" data-bs-toggle="tab" data-bs-target="#nav-basket"
-                    type="button" role="tab" aria-controls="nav-basket" aria-selected="false">Корзина</button>
+                    type="button" role="tab" aria-controls="nav-basket" aria-selected="false">Конструктор чуду</button>
             </div>
         </nav>
 
@@ -174,7 +174,8 @@
 
                                                         <div class="card border-secondary bg-light"
                                                             style="height: 410px;">
-                                                            <img :src="'/storage/card/' + prom.img" {{-- вывод картинки в шаблон vue3 --}}
+                                                            <img :src="'/storage/card/' + prom.img"
+                                                                {{-- вывод картинки в шаблон vue3 --}}
                                                                 style="height: 200px; object-fit: cover;"
                                                                 class="card-img-top" alt="...">
                                                             <div class="card-body text-black">
@@ -494,11 +495,307 @@
 
                 </div>
             </div>
+            <!--конструктор пиццы начало-->
             <div class="tab-pane fade" id="nav-constructor" role="tabpanel" aria-labelledby="nav-constructor-tab">
-                Конструктор
+                <div class="container" id="div_const_pizza">
+                    <div class="row row-cols-1 row-cols-lg-12 mt-3">
+
+                        <div class="col">
+                            <div class="main bg-light p-2 p-lg-4 m-5">
+                                <div class="text-center fs-3">
+                                    Добавление ингредиентов в пиццу
+                                </div>
+                                <form id="const_pizza" class="mt-3">
+                                    @csrf
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input v-model="add_name" type="text" id="name" name="name"
+                                            class="form-control w-75" placeholder="Название ингредиента">
+                                    </div>
+                                    <div class="text-danger text-center mt-1 mb-3">
+                                        @{{ error_add_name }}
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input v-model="add_gramm" type="text" id="gramm" name="gramm"
+                                            class="form-control w-75" placeholder="Граммы">
+                                    </div>
+                                    <div class="text-danger text-center mt-1 mb-3">
+                                        @{{ error_add_gramm }}
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input v-model="add_price" type="text" id="price" name="price"
+                                            class="form-control w-75" placeholder="Цена за порцию">
+
+                                    </div>
+                                    <div class="text-danger text-center mt-1 mb-3">
+                                        @{{ error_add_price }}
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button class="btn btn-primary w-50"
+                                            v-on:click="add_const_pizza">Добавить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div v-for="(item, ib) in ingradient" :key='item' class="col">
+                            <div class="bg-light py-3">
+                                <div class="text-center border-1 border-light border-bottom">
+                                    <span> @{{ item.name }}: (порция- @{{ item.gramm }} гр)</span>
+                                    <button class="btn fs-3 mb-2 text-dark">-</button>
+                                    <span class="border border-secondary px-2 py-1">1</span>
+                                    <button class="btn fs-3 mb-2 text-dark">+</button>
+                                    <span class="fs-5 ms-lg-5">
+                                        @{{ item.price }}₽
+                                    </span>
+                                    <button class="btn mb-2 ms-3" data-bs-toggle="modal"
+                                        :data-bs-target="'#delete_ingradient' + item.id">
+                                        <i class="bi bi-basket fs-4 text-danger"></i>
+                                    </button>
+                                    <button class="btn mb-2 ms-1" data-bs-toggle="modal"
+                                        :data-bs-target="'#edit_ingradient' + item.id">
+                                        <i class="bi bi-pencil text-warning fs-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Модальное окно редактирования инградиентов в конструкторе пицца в меню -->
+                            <div class="modal fade" :id="'edit_ingradient' + item.id" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Редактировать ингредиент
+                                            </h5>
+                                            <button :id="'close_edit_ingradient' + item.id" type="button"
+                                                class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form :id="'edit_ingradient_form' + item.id">
+                                                @csrf
+                                                <div class="d-flex justify-content-center mt-1">
+                                                    <input v-model="item.name" type="text" :id="'name' + item.id"
+                                                        name="name" class="form-control w-75"
+                                                        placeholder="Название ингредиента">
+                                                </div>
+                                                <div class="text-danger text-center mt-1 mb-3">
+                                                    @{{ error_edit_name }}
+                                                </div>
+                                                <div class="d-flex justify-content-center mt-1">
+                                                    <input v-model="item.gramm" type="text" :id="'gramm' + item.id"
+                                                        name="gramm" class="form-control w-75" placeholder="Граммы">
+                                                </div>
+                                                <div class="text-danger text-center mt-1 mb-3">
+                                                    @{{ error_edit_gramm }}
+                                                </div>
+                                                <div class="d-flex justify-content-center mt-1">
+                                                    <input v-model="item.price" type="text" :id="'price' + item.id"
+                                                        name="price" class="form-control w-75"
+                                                        placeholder="Цена за порцию">
+
+                                                </div>
+                                                <div class="text-danger text-center mt-1 mb-3">
+                                                    @{{ error_edit_price }}
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <button type="button" class="btn btn-primary text-white"
+                                                        v-on:click="editingradient(ib)">Изменить</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Назад</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Модальное окно редактирования инградиентов в конструкторе пицца  в меню конец -->
+
+                            <!-- Modal удаления ингредиентов в конструкторе пицца -->
+                            <div class="modal fade" :id="'delete_ingradient' + item.id" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                            </h5>
+                                            <button :id="'close_delete_ingradient' + item.id" type="button"
+                                                class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3 class="text-center">Вы действительно хотите удалить категорию?</h3>
+                                            <div class="d-flex justify-content-center mt-3">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Назад</button>
+                                                <button class="btn btn-danger ms-2"
+                                                    v-on:click='deleteingradient(ib)'>Удалить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal удаления ингредиентов в конструкторе пицца конец -->
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
             </div>
+
+            <!--Конструктор чуду начало-->
             <div class="tab-pane fade" id="nav-basket" role="tabpanel" aria-labelledby="nav-basket-tab">
-                Корзина
+                <div class="container" id="div_const_chudu">
+                    <div class="row row-cols-1 row-cols-lg-12 mt-3">
+
+                        <div class="col">
+                            <div class="main bg-light p-2 p-lg-4 m-5">
+                                <div class="text-center fs-3">
+                                    Добавление ингредиентов в Чуду
+                                </div>
+                                <form id="const_chudu" class="mt-3">
+                                    @csrf
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input v-model="add_name" type="text" id="name" name="name"
+                                            class="form-control w-75" placeholder="Название ингредиента">
+                                    </div>
+                                    <div class="text-danger text-center mt-1 mb-3">
+                                        @{{ error_add_name }}
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input v-model="add_gramm" type="text" id="gramm" name="gramm"
+                                            class="form-control w-75" placeholder="Граммы">
+                                    </div>
+                                    <div class="text-danger text-center mt-1 mb-3">
+                                        @{{ error_add_gramm }}
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <input v-model="add_price" type="text" id="price" name="price"
+                                            class="form-control w-75" placeholder="Цена за порцию">
+
+                                    </div>
+                                    <div class="text-danger text-center mt-1 mb-3">
+                                        @{{ error_add_price }}
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button class="btn btn-primary w-50" v-on:click="add_const">Добавить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div v-for="(item, ib) in ingradient" :key='item' class="col">
+                            <div class="bg-light py-3">
+                                <div class="text-center border-1 border-light border-bottom">
+                                    <span> @{{ item.name }}: (порция- @{{ item.gramm }} гр)</span>
+                                    <button class="btn fs-3 mb-2 text-dark">-</button>
+                                    <span class="border border-secondary px-2 py-1">1</span>
+                                    <button class="btn fs-3 mb-2 text-dark">+</button>
+                                    <span class="fs-5 ms-lg-5">
+                                        @{{ item.price }}₽
+                                    </span>
+                                    <button class="btn mb-2 ms-3" data-bs-toggle="modal"
+                                        :data-bs-target="'#delete_ingradient' + item.id">
+                                        <i class="bi bi-basket fs-4 text-danger"></i>
+                                    </button>
+                                    <button class="btn mb-2 ms-1" data-bs-toggle="modal"
+                                        :data-bs-target="'#edit_ingradient' + item.id">
+                                        <i class="bi bi-pencil text-warning fs-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Модальное окно редактирования инградиентов в конструкторе  в меню -->
+                            <div class="modal fade" :id="'edit_ingradient' + item.id" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Редактировать ингредиент
+                                            </h5>
+                                            <button :id="'close_edit_ingradient' + item.id" type="button"
+                                                class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form :id="'edit_ingradient_form' + item.id">
+                                                @csrf
+                                                <div class="d-flex justify-content-center mt-1">
+                                                    <input v-model="item.name" type="text" :id="'name' + item.id"
+                                                        name="name" class="form-control w-75"
+                                                        placeholder="Название ингредиента">
+                                                </div>
+                                                <div class="text-danger text-center mt-1 mb-3">
+                                                    @{{ error_edit_name }}
+                                                </div>
+                                                <div class="d-flex justify-content-center mt-1">
+                                                    <input v-model="item.gramm" type="text" :id="'gramm' + item.id"
+                                                        name="gramm" class="form-control w-75" placeholder="Граммы">
+                                                </div>
+                                                <div class="text-danger text-center mt-1 mb-3">
+                                                    @{{ error_edit_gramm }}
+                                                </div>
+                                                <div class="d-flex justify-content-center mt-1">
+                                                    <input v-model="item.price" type="text" :id="'price' + item.id"
+                                                        name="price" class="form-control w-75"
+                                                        placeholder="Цена за порцию">
+
+                                                </div>
+                                                <div class="text-danger text-center mt-1 mb-3">
+                                                    @{{ error_edit_price }}
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <button type="button" class="btn btn-primary text-white"
+                                                        v-on:click="editingradient(ib)">Изменить</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Назад</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Модальное окно редактирования инградиентов в конструкторе чуду  в меню конец -->
+
+                            <!-- Modal удаления ингредиентов в конструкторе чуду -->
+                            <div class="modal fade" :id="'delete_ingradient' + item.id" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                            </h5>
+                                            <button :id="'close_delete_ingradient' + item.id" type="button"
+                                                class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3 class="text-center">Вы действительно хотите удалить категорию?</h3>
+                                            <div class="d-flex justify-content-center mt-3">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Назад</button>
+                                                <button class="btn btn-danger ms-2"
+                                                    v-on:click='deleteingradient(ib)'>Удалить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal удаления ингредиентов в конструкторе чуду конец -->
+
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -529,6 +826,7 @@
 
     <script src="/public/script.js"></script>
     <script src="/admin.js"></script>
+    <script src="/const.js"></script>
 </body>
 
 </html>

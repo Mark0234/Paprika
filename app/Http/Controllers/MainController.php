@@ -8,6 +8,9 @@ use App\Models\Main_homeModel;
 use App\Models\MenuCategoryModel;
 use App\Models\MenuCategoryCardModel;
 use App\Models\BasketModel;
+use App\Models\Const_pizza_Model;
+use App\Models\Const_chudu_Model;
+use App\Models\Add_arrange_Model;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -154,7 +157,7 @@ class MainController extends Controller
         $card = new MenuCategoryCardModel();
         return $card->latest()->first();  //Вывести последнюю запись с базы
     }
-//вывод в шаблон админки
+    //вывод в шаблон админки
     public function menu_category_card()
     {
         $category_card = new MenuCategoryCardModel();
@@ -213,9 +216,122 @@ class MainController extends Controller
         $basket = BasketModel::where('user', '=', $_SERVER['REMOTE_ADDR'])->get();
         return $basket;
     }
-
+    //вывод всего в шаблон продукты
     public function all_product() {
         $product = MenuCategoryCardModel::all();
         return $product;
+    }
+    //конструктор пиццы начала
+    public function add_const_pizza(Request $data)
+    {
+        $valid = $data->validate([
+            'name' => ['required'],
+            'gramm' => ['required'],
+            'price' => ['required'],
+        ]);
+
+        $const_pizza = new Const_pizza_Model(); //Добовление  в базу
+        $const_pizza->name = $data->input('name');
+        $const_pizza->gramm = $data->input('gramm');
+        $const_pizza->price = $data->input('price');
+        $const_pizza->save();
+
+        $const_pizza = new Const_pizza_Model();
+        return $const_pizza->latest()->first(); //Вывести последнюю запись с базы
+    }
+
+    public function const_pizza_all() {
+        $const_pizza = Const_pizza_Model::all();
+        return $const_pizza;
+    }
+
+    public function edit_const_pizza(Request $data, $id)
+    {
+        $valid = $data->validate([
+            'name' => ['required'],
+            'gramm' => ['required'],
+            'price' => ['required'],
+        ]);
+
+        $const_pizza = Const_pizza_Model::find($id); //Редактирование  в базе
+        $const_pizza->name = $data->input('name');
+        $const_pizza->gramm = $data->input('gramm');
+        $const_pizza->price = $data->input('price');
+        $const_pizza->save();
+    }
+
+    public function delete_ingradient($id)
+    {
+        Const_pizza_Model::find($id)->delete(); //Удаление инградиентов
+    }
+
+    //конструктор чуду начало
+    public function add_const_chudu(Request $data)
+    {
+        $valid = $data->validate([
+            'name' => ['required'],
+            'gramm' => ['required'],
+            'price' => ['required'],
+        ]);
+
+        $const_chudu = new Const_chudu_Model(); //Добовление  в базу
+        $const_chudu->name = $data->input('name');
+        $const_chudu->gramm = $data->input('gramm');
+        $const_chudu->price = $data->input('price');
+        $const_chudu->save();
+
+        $const_chudu = new Const_chudu_Model();
+        return $const_chudu->latest()->first(); //Вывести последнюю запись с базы
+    }
+
+    public function const_chudu_all() {
+        $const_chudu = Const_chudu_Model::all();
+        return $const_chudu;
+    }
+
+    public function edit_const_chudu(Request $data, $id)
+    {
+        $valid = $data->validate([
+            'name' => ['required'],
+            'gramm' => ['required'],
+            'price' => ['required'],
+        ]);
+
+        $const_chudu = Const_chudu_Model::find($id); //Редактирование  в базе
+        $const_chudu->name = $data->input('name');
+        $const_chudu->gramm = $data->input('gramm');
+        $const_chudu->price = $data->input('price');
+        $const_chudu->save();
+    }
+
+    public function delete_ingradient_chudu($id)
+    {
+        Const_chudu_Model::find($id)->delete(); //Удаление инградиентов
+    }
+
+    public function add_arrange(Request $data)
+    {
+        $valid = $data->validate([
+            'name' => ['required'],
+            'tel' => ['required', 'min:10' , 'max:12'],
+            'address' => ['required'],
+            'message' => ['min:3', 'max:250'],
+            'sposob' => ['required'],
+        ]);
+
+        $add_arrange = new Add_arrange_Model(); //Добовление  в базу
+        $product = rtrim($data->input('product'), ",");
+        $add_arrange->product = $product;
+        $add_arrange->sum = $data->input('sum');
+        $add_arrange->name = $data->input('name');
+        $add_arrange->tel = $data->input('tel');
+        $add_arrange->address = $data->input('address');
+        if($data->input('message') != '') {
+            $add_arrange->message = $data->input('message');
+        } else {
+            $add_arrange->message = '';
+        }
+        $add_arrange->sposob = $data->input('sposob');
+        $add_arrange->save();
     }
 };

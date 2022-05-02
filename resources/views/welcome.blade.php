@@ -14,7 +14,7 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+        </script>
     <meta name="msapplication-TileColor" content="#000000">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,8 +28,8 @@
         content="Доставка еды по городу Дербент, частые акции и вкус нашей еды не оставят вас равнодушными!" />
     <!-- Ajax -->
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@next"></script>
     <style>
         .w-c {
@@ -52,7 +52,6 @@
                 background-position: left;
             }
         }
-
     </style>
 </head>
 
@@ -129,8 +128,8 @@
                                     </div>
                                     <div class="offcanvas-body text-light">
                                         <div class="d-flex justify-content-center">
-                                            <img src="/public/storage/folder/{{ $main->img_main }}" alt=""
-                                                width="150px">
+                                            <img src="/public/storage/folder/{{ $main->img_main }}" alt="" width="150px"
+                                                style="width: 150px">
                                         </div>
                                         <h1 class="text-paprika text-center mt-lg-1">{{ $main->name_main }}</h1>
                                         <div style="background: rgba(0, 0, 0, 0.616);"
@@ -192,8 +191,8 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center mt-2">
-                                            <span
-                                                class="fs-2 fw-bold bg-warning px-4 py-3 rounded-pill text-dark">{{ $main_home->name }}
+                                            <span class="fs-2 fw-bold bg-warning px-4 py-3 rounded-pill text-dark">{{
+                                                $main_home->name }}
                                             </span>
                                         </div>
                                         <p class="text-center mt-1 fs-5">{{ $main_home->slogan }}
@@ -227,40 +226,39 @@
                                     <div class="div-menu mt-2  mt-lg-0  mb-lg-5">
                                         <!--Карточки с чуду начало-->
                                         @foreach ($category as $item)
-                                            <div class="mt-2 mt-lg-0">
-                                                <div class="text-start fs-1 fw-bold">{{ $item->name }}</div>
-                                                <div class="card-chudu mt-3">
+                                        <div class="mt-2 mt-lg-0">
+                                            <div class="text-start fs-1 fw-bold">{{ $item->name }}</div>
+                                            <div class="card-chudu mt-3">
 
-                                                    <div class="row row-cols-lg-3">
-                                                        @foreach ($category_card->where('type', $item->id) as $item_card)
-                                                            <div class="col mt-lg-1 ">
-                                                                <div class="card border-0 rounded-3"
-                                                                    style="height: 410px;">
-                                                                    <img src="/storage/card/{{ $item_card->img }}"
-                                                                        style="height: 200px; object-fit: cover;"
-                                                                        class="card-img-top" alt="...">
-                                                                    <div class="card-body text-black">
-                                                                        <h3 class="card-title text-center">
-                                                                            {{ $item_card->name }}
-                                                                        </h3>
-                                                                        <p class="card-text">
-                                                                            {{ $item_card->description }}</p>
-                                                                        <p class="text-start">Цена:
-                                                                            {{ $item_card->price }}₽</p>
-                                                                        <div class="d-flex justify-content-center">
-                                                                            <button id="card{{ $item_card->id }}"
-                                                                                v-on:click="addbasket('{{ $item_card->id }}')"
-                                                                                class="btn btn-warning text-dark"><i
-                                                                                    class="bi bi-minecart"></i>
-                                                                                В корзину</button>
-                                                                        </div>
-                                                                    </div>
+                                                <div class="row row-cols-lg-3">
+                                                    @foreach ($category_card->where('type', $item->id) as $item_card)
+                                                    <div class="col mt-lg-1 ">
+                                                        <div class="card border-0 rounded-3" style="height: 410px;">
+                                                            <img src="/storage/card/{{ $item_card->img }}"
+                                                                style="height: 200px; object-fit: cover;"
+                                                                class="card-img-top" alt="...">
+                                                            <div class="card-body text-black">
+                                                                <h3 class="card-title text-center">
+                                                                    {{ $item_card->name }}
+                                                                </h3>
+                                                                <p class="card-text">
+                                                                    {{ $item_card->description }}</p>
+                                                                <p class="text-start">Цена:
+                                                                    {{ $item_card->price }}₽</p>
+                                                                <div class="d-flex justify-content-center">
+                                                                    <button id="card{{ $item_card->id }}"
+                                                                        v-on:click="addbasket('{{ $item_card->id }}')"
+                                                                        class="btn btn-warning text-dark"><i
+                                                                            class="bi bi-minecart"></i>
+                                                                        В корзину</button>
                                                                 </div>
                                                             </div>
-                                                        @endforeach
+                                                        </div>
                                                     </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
+                                        </div>
                                         @endforeach
                                         <!--Карточки с чуду конец-->
 
@@ -301,106 +299,138 @@
                                             <!-- конструктор Пицца начало-->
                                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                                 aria-labelledby="pills-home-tab">
-                                                <div class="const-pizza">
-                                                    <div class="row row-cols-lg-1">
+                                                <div>
+                                                    <div class="const-pizza">
+                                                        <div class="row row-cols-lg-1">
 
-                                                        <div class="col">
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <div>
-                                                                    <img src="/images/pizza2.png" alt=""
-                                                                        class="mx-auto d-block" style="width: 200px">
+                                                            <div class="col">
+                                                                <div class="d-flex flex-column justify-content-center">
+                                                                    <div>
+                                                                        <img src="/images/pizza2.png" alt=""
+                                                                            class="mx-auto d-block"
+                                                                            style="width: 200px">
+                                                                    </div>
+
+                                                                    <div class=" d-flex flex-column text-center lead">
+                                                                        <span style="font-weight: 600">Пицца
+                                                                            содержит:</span>
+                                                                        <span class="lead mt-2">Тесто</span>
+                                                                        <div class="mt-1">
+                                                                            Толстое
+                                                                            <input class="form-check-input" value="150"
+                                                                                v-model="testo" type="radio"
+                                                                                name="flexRadioDefault"
+                                                                                id="flexRadioDefault3">
+                                                                            Тонкое
+                                                                            <input class="form-check-input" value="100"
+                                                                                v-model="testo" type="radio"
+                                                                                name="flexRadioDefault"
+                                                                                id="flexRadioDefault4">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div v-for="(item, ib) in ingradient_pizza"
+                                                                        :key="item"
+                                                                        class="text-center border-1 border-light border-bottom">
+                                                                        <span>@{{ item.name }}: (порция- @{{ item.gramm
+                                                                            }} гр)</span>
+                                                                        <button class="btn fs-3 mb-2 text-light"
+                                                                            v-on:click="minus_ingridient(ib)">-</button>
+                                                                        <span
+                                                                            class="border border-secondary px-2 py-1">@{{
+                                                                            item.colvo }}</span>
+                                                                        <button class="btn fs-3 mb-2 text-light"
+                                                                            v-on:click="plus_ingridient(ib)">+</button>
+                                                                        <span class="fs-5 ms-lg-5 ms-0">
+                                                                            @{{ item.price }}₽
+                                                                        </span>
+                                                                    </div>
+
                                                                 </div>
 
-                                                                <div class="text-center">
-                                                                    <span>Помидоры: (порция- 50 гр)</span><button
-                                                                        class="btn fs-3 mb-2 text-light">-</button><span
-                                                                        class="border border-secondary px-2 py-1">1</span><button
-                                                                        class="btn fs-3 mb-2 text-light">+</button>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <span>Помидоры: (порция- 50 гр)</span><button
-                                                                        class="btn fs-3 mb-2 text-light">-</button><span
-                                                                        class="border border-secondary px-2 py-1">1</span><button
-                                                                        class="btn fs-3 mb-2 text-light">+</button>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <span>Помидоры: (порция- 50 гр)</span><button
-                                                                        class="btn fs-3 mb-2 text-light">-</button><span
-                                                                        class="border border-secondary px-2 py-1">1</span><button
-                                                                        class="btn fs-3 mb-2 text-light">+</button>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <span>Помидоры: (порция- 50 гр)</span><button
-                                                                        class="btn fs-3 mb-2 text-light">-</button><span
-                                                                        class="border border-secondary px-2 py-1">1</span><button
-                                                                        class="btn fs-3 mb-2 text-light">+</button>
-                                                                </div>
                                                             </div>
 
                                                         </div>
-
                                                     </div>
+                                                    <!--footer Пицца конструктор начало-->
+                                                    <button v-if="testo != 0"
+                                                        style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
+                                                        class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0"
+                                                        id="pizza" v-on:click="add_basket_pizza">
+                                                        Собрать за: @{{Number(colvo)+Number(testo)}}₽
+                                                    </button>
+                                                    <button v-else
+                                                        style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
+                                                        class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0">
+                                                        Выберите тесто
+                                                    </button>
+                                                    <!--footer Пицца конструктор конец-->
                                                 </div>
-                                                <!--footer Пицца конструктор начало-->
-                                                <button
-                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
-                                                    class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0">
-                                                    Собрать пиццу за: 800₽
-                                                </button>
-                                                <!--footer Пицца конструктор конец-->
                                             </div>
                                             <!-- конструктор Пицца конец-->
 
                                             <!-- конструктор Чуду начало-->
                                             <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                                                 aria-labelledby="pills-profile-tab">
-                                                <div class="const-chudu">
-                                                    <div class="row row-cols-lg-1">
+                                                <div>
+                                                    <div class="const-chudu">
+                                                        <div class="row row-cols-lg-1">
 
-                                                        <div class="col">
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <div>
-                                                                    <img src="images/chudu111.jpg" alt=""
-                                                                        class="mx-auto d-block" style="width: 200px">
+                                                            <div class="col">
+                                                                <div class="d-flex flex-column justify-content-center">
+                                                                    <div>
+                                                                        <img src="images/chudu111.jpg" alt=""
+                                                                            class="mx-auto d-block"
+                                                                            style="width: 200px">
+                                                                    </div>
+
+                                                                    <div class=" d-flex flex-column text-center lead">
+                                                                        <span style="font-weight: 600">Чуду
+                                                                            содержит:</span>
+                                                                        <span class="lead mt-2">Тесто</span>
+                                                                        <div class="mt-1">
+                                                                            Толстое
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="flexRadioDefault"
+                                                                                id="flexRadioDefault3" value="100"
+                                                                                v-model="testo">
+                                                                            Тонкое
+                                                                            <input class="form-check-input mt-2"
+                                                                                type="radio" name="flexRadioDefault"
+                                                                                id="flexRadioDefault4" value="200"
+                                                                                v-model="testo">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div v-for="(item, ib) in ingradient_chudu"
+                                                                        class="text-center border-1 border-light border-bottom">
+                                                                        <span>@{{ item.name }}: (порция- @{{ item.gramm
+                                                                            }} гр)</span>
+                                                                        <button class="btn fs-3 mb-2 text-light"
+                                                                            v-on:click="minus_ingridient_chudu(ib)">-</button>
+                                                                        <span
+                                                                            class="border border-secondary px-2 py-1">@{{
+                                                                            item.colvo }}</span>
+                                                                        <button class="btn fs-3 mb-2 text-light"
+                                                                            v-on:click="plus_ingridient_chudu(ib)">+</button>
+                                                                        <span class="fs-5 ms-lg-5 ms-0">
+                                                                            @{{ item.price }}₽
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
 
-                                                                <div class="text-center">
-                                                                    <span>Помидоры: (порция- 50 гр)</span><button
-                                                                        class="btn fs-3 mb-2 text-light">-</button><span
-                                                                        class="border border-secondary px-2 py-1">1</span><button
-                                                                        class="btn fs-3 mb-2 text-light">+</button>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <span>Помидоры: (порция- 50 гр)</span><button
-                                                                        class="btn fs-3 mb-2 text-light">-</button><span
-                                                                        class="border border-secondary px-2 py-1">1</span><button
-                                                                        class="btn fs-3 mb-2 text-light">+</button>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <span>Помидоры: (порция- 50 гр)</span><button
-                                                                        class="btn fs-3 mb-2 text-light">-</button><span
-                                                                        class="border border-secondary px-2 py-1">1</span><button
-                                                                        class="btn fs-3 mb-2 text-light">+</button>
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <span>Помидоры: (порция- 50 гр)</span><button
-                                                                        class="btn fs-3 mb-2 text-light">-</button><span
-                                                                        class="border border-secondary px-2 py-1">1</span><button
-                                                                        class="btn fs-3 mb-2 text-light">+</button>
-                                                                </div>
                                                             </div>
 
                                                         </div>
-
                                                     </div>
+                                                    <!--footer конструктор начало-->
+                                                    <button
+                                                        style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
+                                                        class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0"
+                                                        id="chudu" v-on:click="add_basket_chudu">
+                                                        Собрать за: @{{Number(colvo)+Number(testo)}}₽
+                                                    </button>
+                                                    <!--footer конструктор конец-->
                                                 </div>
-                                                <!--footer конструктор начало-->
-                                                <button
-                                                    style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
-                                                    class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0">
-                                                    Собрать чуду за: 600₽
-                                                </button>
-                                                <!--footer конструктор конец-->
                                             </div>
                                             <!-- конструктор Чуду конец-->
 
@@ -423,8 +453,8 @@
                                                 class="col mt-2 mt-lg-4 ms-lg-0">
                                                 <div class="card border-0 rounded-3" style=" height: 400px;">
                                                     <img :src="'/storage/card/' + item.img"
-                                                        style="height: 200px; object-fit: cover;"
-                                                        class="card-img-top" alt="...">
+                                                        style="height: 200px; object-fit: cover;" class="card-img-top"
+                                                        alt="...">
                                                     <div class="card-body text-black">
                                                         <h3 class="card-title text-center">@{{ item.name }}
                                                         </h3>
@@ -433,13 +463,15 @@
                                                             <span>Цена: @{{ item.price }}₽</span>
                                                             <div class="d-flex">
                                                                 <span class="">Кол.во:
-                                                                    <button v-on:click="minus(item.id)" class="btn fs-3 mb-2">
+                                                                    <button v-on:click="minus(item.id)"
+                                                                        class="btn fs-3 mb-2">
                                                                         -
                                                                     </button>
                                                                     <span class="border border-secondary px-2 py-1">
                                                                         @{{ item.colvo }}
                                                                     </span>
-                                                                    <button v-on:click="plus(item.id)" class="btn fs-3 mb-2">
+                                                                    <button v-on:click="plus(item.id)"
+                                                                        class="btn fs-3 mb-2">
                                                                         +
                                                                     </button>
                                                                 </span>
@@ -458,7 +490,7 @@
                                         style="position: relative; bottom: 0; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
                                         class="fixed-bottom border-0 fs-4 py-2 py-lg-1 mt-2 mt-lg-0  fs-4 w-100 d-block text-white"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Купить за: 500₽
+                                        Купить за @{{itogo}}₽
                                     </button>
 
                                     <!-- Modal footer корзина начало -->
@@ -468,37 +500,36 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title2 lead">Оформите заказ</h5>
-                                                    <button type="button" class="btn-close"
-                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close" id="close_arrange"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="/" method="POST">
-
-                                                        <div class="mb-2 text-danger"></div>
-
+                                                    <form id="add_arrange">
+                                                        @csrf
                                                         <div class="form-floating mb-3">
-                                                            <input type="text" name="name"
+                                                            <input type="text" name="name" v-model="name"
                                                                 class="form-control bg-light" id="floatingInput"
                                                                 placeholder="Введите номер телефона">
                                                             <label for="floatingInput">Имя</label>
+                                                            <div class="mb-2 text-danger">@{{ error_name }}</div>
                                                         </div>
-                                                        <div class="mb-2 text-danger"></div>
 
                                                         <div class="form-floating mb-3">
-                                                            <input type="tel" name="tel" class="form-control bg-light"
-                                                                id="floatingInput" placeholder="Введите номер телефона">
+                                                            <input type="tel" name="tel" v-model="tel"
+                                                                class="form-control bg-light" id="floatingInput"
+                                                                placeholder="Введите номер телефона">
                                                             <label for="floatingInput">Номер телефона</label>
+                                                            <div class="mb-2 text-danger">@{{ error_tel }}</div>
                                                         </div>
-                                                        <div class="mb-2 text-danger"></div>
 
                                                         <div class="form-floating mb-3">
-                                                            <input type="text" name="address"
+                                                            <input type="text" name="address" v-model="address"
                                                                 class="form-control bg-light" id="floatingInput"
                                                                 placeholder="Введите номер телефона">
                                                             <label for="floatingInput">Адрес доставки (Улица, дом,
                                                                 корпус)</label>
+                                                            <div class="mb-2 text-danger">@{{ error_address }}</div>
                                                         </div>
-                                                        <div class="mb-2 text-danger"></div>
 
                                                         <!--
                                                            <div class="d-flex justify-content-around mb-3">
@@ -534,11 +565,16 @@
 
                                                         </div>
                                                         -->
-
-                                                        <div class="form-floating mb-3 py-3">
-                                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea_mess"></textarea>
-                                                            <label for="floatingTextarea_mess">Сообщение для
-                                                                курьера (№Кв/офис, Домофон, Подъезд, Этаж)</label>
+                                                        <label class="small text-black">Сообщение для
+                                                            курьера (№Кв/офис, Домофон, Подъезд, Этаж)</label>
+                                                        <div class="form-floating mb-3 py-1 mt-1">
+                                                            <textarea name="message" v-model="message"
+                                                                class="form-control pt-3"
+                                                                placeholder="Leave a comment here"
+                                                                id="floatingTextarea_mess"></textarea>
+                                                            <div class="mb-2 text-danger">
+                                                                @{{ error_message }}
+                                                            </div>
                                                         </div>
 
 
@@ -550,23 +586,12 @@
                                                                 <span class="ms-auto fs-4">Сумма</span>
                                                             </div>
 
-                                                            <div
+                                                            <div :key='item' v-for="(item ,ib) in card"
                                                                 class="d-flex border-1 border-secondary border-bottom py-2">
-                                                                <span class="">Чуду с зеленью</span>
-                                                                <span class="ms-1">* 5</span>
-                                                                <span class="ms-auto">400р</span>
-                                                            </div>
-                                                            <div
-                                                                class="d-flex border-1 border-secondary border-bottom py-2">
-                                                                <span class="">Чуду с мясо
-                                                                    картошка</span>
-                                                                <span class="ms-1">* 5</span>
-                                                                <span class="ms-auto">600 ₽</span>
-                                                            </div>
-                                                            <div class="d-flex border-1 border-secondary  py-2">
-                                                                <span class="">Пицца</span>
-                                                                <span class="ms-1">* 5</span>
-                                                                <span class="ms-auto">800 ₽</span>
+                                                                <span class="">@{{ item.name }}</span>
+                                                                <span class="ms-2"> * @{{ item.colvo }}</span>
+                                                                <span class="ms-auto">@{{ item.colvo * item.price }} ₽
+                                                                </span>
                                                             </div>
 
                                                         </div>
@@ -578,18 +603,18 @@
                                                                 <div class="col ps-lg-4">
                                                                     <div class="d-flex justify-content-center">
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input"
-                                                                                type="radio" name="flexRadioDefault"
-                                                                                id="flexRadioDefault1">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                value="Наличные" v-model="sposob"
+                                                                                name="sposob" id="flexRadioDefault1">
                                                                             <label class="form-check-label"
                                                                                 for="flexRadioDefault1">
                                                                                 Наличными
                                                                             </label>
                                                                         </div>
                                                                         <div class="form-check ms-2">
-                                                                            <input class="form-check-input"
-                                                                                type="radio" name="flexRadioDefault"
-                                                                                id="flexRadioDefault2" checked>
+                                                                            <input class="form-check-input" type="radio"
+                                                                                value="СберОнлайн" name="sposob"
+                                                                                v-model="sposob" id="flexRadioDefault2">
                                                                             <label class="form-check-label"
                                                                                 for="flexRadioDefault2">
                                                                                 СберОнлайн
@@ -598,13 +623,17 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="mb-2 text-center text-danger">
+                                                                @{{ error_sposob }}
+                                                            </div>
                                                         </div>
 
-                                                        <h1 class="text-center mb-1">Итого: 1500Р</h1>
+                                                        <input type="hidden" name="sum" v-model="itogo">
+                                                        <input type="hidden" name="product" v-model="product">
 
-                                                        <button
+                                                        <h1 class="text-center mb-1">Итого: @{{itogo}}₽</h1>
+                                                        <button v-on:click="arrange"
                                                             class="btn btn-primary w-100 mt-2 py-2">Оформить</button>
-
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
@@ -615,6 +644,29 @@
                                         </div>
                                     </div>
                                     <!-- Modal footer корзина конец -->
+
+                                    <!-- Начало заказ оформлен -->
+                                    <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal"
+                                        data-bs-target="#arrange_success"></button>
+
+                                    <div class="modal fade" id="arrange_success" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body d-flex flex-column">
+                                                    <i class="bi bi-check-lg fs-1 text-success"></i>
+                                                    <h4>Заказ оформлен</h4>
+                                                    <p>Ожидайте доставки</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Конец заказ офрмлен -->
 
                                     <!--footer корзина конец-->
                                 </div>
@@ -648,6 +700,7 @@
         }
     </script>
     <script src="/basket.js"></script>
+    <script src="/const.js"></script>
 </body>
 
 </html>

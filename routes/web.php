@@ -25,6 +25,17 @@ Route::get('/add_basket/{id}', [MainController::class, 'add_basket']);
 Route::get('/all_card', [MainController::class, 'all_card']);
 Route::get('/all_product', [MainController::class, 'all_product']);
 Route::get('/card_basket/{id}', [MainController::class, 'card_basket']);
+Route::post('/add_const_pizza', [MainController::class, 'add_const_pizza']);
+Route::get('/const_pizza_all', [MainController::class, 'const_pizza_all']);
+Route::post('/edit_const_pizza/{id}', [MainController::class, 'edit_const_pizza']);
+Route::get('/delete_ingradient/{id}', [MainController::class, 'delete_ingradient']);
+
+Route::post('/add_const_chudu', [MainController::class, 'add_const_chudu']);
+Route::get('/const_chudu_all', [MainController::class, 'const_chudu_all']);
+Route::post('/edit_const_chudu/{id}', [MainController::class, 'edit_const_chudu']);
+Route::get('/delete_ingradient_chudu/{id}', [MainController::class, 'delete_ingradient_chudu']);
+
+Route::post('/add_arrange', [MainController::class, 'add_arrange']);
 
 
 
