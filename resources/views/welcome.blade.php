@@ -318,12 +318,12 @@
                                                                         <div class="mt-1">
                                                                             Толстое
                                                                             <input class="form-check-input" value="150"
-                                                                                v-model="testo" type="radio"
+                                                                                v-model="testo_pizza" type="radio"
                                                                                 name="flexRadioDefault"
                                                                                 id="flexRadioDefault3">
                                                                             Тонкое
                                                                             <input class="form-check-input" value="100"
-                                                                                v-model="testo" type="radio"
+                                                                                v-model="testo_pizza" type="radio"
                                                                                 name="flexRadioDefault"
                                                                                 id="flexRadioDefault4">
                                                                         </div>
@@ -352,11 +352,11 @@
                                                         </div>
                                                     </div>
                                                     <!--footer Пицца конструктор начало-->
-                                                    <button v-if="testo != 0"
+                                                    <button v-if="testo_pizza != 0"
                                                         style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
                                                         class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0"
                                                         id="pizza" v-on:click="add_basket_pizza">
-                                                        Собрать за: @{{Number(colvo)+Number(testo)}}₽
+                                                        Собрать за: @{{Number(colvo_pizza)+Number(testo_pizza)}}₽
                                                     </button>
                                                     <button v-else
                                                         style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
@@ -392,12 +392,12 @@
                                                                             <input class="form-check-input" type="radio"
                                                                                 name="flexRadioDefault"
                                                                                 id="flexRadioDefault3" value="100"
-                                                                                v-model="testo">
+                                                                                v-model="testo_chudu">
                                                                             Тонкое
                                                                             <input class="form-check-input mt-2"
                                                                                 type="radio" name="flexRadioDefault"
                                                                                 id="flexRadioDefault4" value="200"
-                                                                                v-model="testo">
+                                                                                v-model="testo_chudu">
                                                                         </div>
                                                                     </div>
 
@@ -423,11 +423,17 @@
                                                         </div>
                                                     </div>
                                                     <!--footer конструктор начало-->
-                                                    <button
+                                                    <button v-if="testo_chudu != 0"
                                                         style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
                                                         class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0"
                                                         id="chudu" v-on:click="add_basket_chudu">
-                                                        Собрать за: @{{Number(colvo)+Number(testo)}}₽
+                                                        Собрать за: @{{Number(colvo_chudu)+Number(testo_chudu)}}₽
+                                                    </button>
+                                                    <button v-else
+                                                        style="position: relative; bottom: 0px; background: rgba(0, 0, 0, 0.9); border-radius: 1% 1% 10% 10%;"
+                                                        class="w-100 d-block border border-0 text-white fs-4 py-2 py-lg-1 mt-1 mt-lg-0"
+                                                        id="chudu">
+                                                        Выберите тесто
                                                     </button>
                                                     <!--footer конструктор конец-->
                                                 </div>
@@ -629,11 +635,11 @@
                                                         </div>
 
                                                         <input type="hidden" name="sum" v-model="itogo">
-                                                        <input type="hidden" name="product" v-model="product">
 
                                                         <h1 class="text-center mb-1">Итого: @{{itogo}}₽</h1>
                                                         <button v-on:click="arrange"
-                                                            class="btn btn-primary w-100 mt-2 py-2">Оформить</button>
+                                                            class="btn btn-primary w-100 mt-2 py-2"
+                                                            class="d-none">Оформить</button>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
@@ -642,7 +648,34 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
+                                    <!-- модальное окно при успешной отправке заявки -->
+                                    <button class="d-none" id="arrange_suc" data-bs-toggle="modal"
+                                        data-bs-target="#arrange_form"></button>
+
+                                    <div class="modal fade" id="arrange_form" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class=" py-3 text-center fs-1 px-3 lead text-success"><i
+                                                            class="bi bi-check2-circle"></i>
+                                                    </div>
+                                                    <div class="fs-4 text-center px-2 lead text-dark">Спасибо
+                                                        <span>ваш заказ уже готовится</span>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary text-white"
+                                                        data-bs-dismiss="modal" aria-label="Close">Окей</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--модальное окно при успешной отправке заявки конец -->
+
+
                                     <!-- Modal footer корзина конец -->
 
                                     <!-- Начало заказ оформлен -->

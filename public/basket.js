@@ -4,8 +4,10 @@ const Main = {
             card: JSON.parse(localStorage.getItem("test")), //Получаем данные из локального хранилища
             ingradient_chudu: [],
             ingradient_pizza: [],
-            testo: 0,
-            colvo: 0,
+            testo_pizza: 0,
+            testo_chudu: 0,
+            colvo_pizza: 0,
+            colvo_chudu: 0,
             itogo: 0,
             error_name: "",
             error_tel: "",
@@ -176,14 +178,14 @@ const Main = {
             var prom = this.ingradient_pizza;
             var e_item = prom[ib];
             e_item.colvo = Number(e_item.colvo) + 1;
-            this.colvo = Number(this.colvo) + Number(e_item.price);
+            this.colvo_pizza = Number(this.colvo_pizza) + Number(e_item.price);
         },
         // каунтер ++ chudu
         plus_ingridient_chudu(ib) {
             var prom = this.ingradient_chudu;
             var e_item = prom[ib];
             e_item.colvo = Number(e_item.colvo) + 1;
-            this.colvo = Number(this.colvo) + Number(e_item.price);
+            this.colvo_chudu = Number(this.colvo_chudu) + Number(e_item.price);
         },
         //каунтер -- pizza
         minus_ingridient(ib) {
@@ -191,7 +193,8 @@ const Main = {
             var e_item = prom[ib];
             if (e_item.colvo != 0) {
                 e_item.colvo = Number(e_item.colvo) - 1;
-                this.colvo = Number(this.colvo) - Number(e_item.price);
+                this.colvo_pizza =
+                    Number(this.colvo_pizza) - Number(e_item.price);
             }
         },
 
@@ -201,19 +204,22 @@ const Main = {
             var e_item = prom[ib];
             if (e_item.colvo != 0) {
                 e_item.colvo = Number(e_item.colvo) - 1;
-                this.colvo = Number(this.colvo) - Number(e_item.price);
+                this.colvo_chudu =
+                    Number(this.colvo_chudu) - Number(e_item.price);
             }
         },
         //добавление в карзину пиццу собранную  в конструкторе
         add_basket_pizza() {
             prom = this.card;
-            latest = this.card.slice(-1);
-            if (latest.length != 0) {
+            latestId = "";
+            if (this.card != null) {
+                latest = this.card.slice(-1);
                 //если в корзине ничего нет то добавляет туда
                 latest.forEach(function (elem) {
-                    latestId = elem["id"] + 1;
+                    latestId = elem["id"] + 1000;
                 });
             } else {
+                this.card = [];
                 latestId = 1;
             }
             var sostav = "";
@@ -222,15 +228,16 @@ const Main = {
                     sostav = `${sostav}${elem["name"]}  ${
                         elem["gramm"] * elem["colvo"]
                     }гр ,  `;
-                    this.colvo = this.colvo + elem["colvo"] * elem["price"];
+                    this.colvo_pizza =
+                        this.colvo_pizza + elem["colvo"] * elem["price"];
                 }
             });
             prom.push({
                 id: latestId,
                 img: "pizza2.png",
-                name: "#ЯПицца",
+                name: "ЯПицца",
                 description: sostav,
-                price: Number(this.colvo) + Number(this.testo),
+                price: Number(this.colvo_pizza) + Number(this.testo_pizza),
                 colvo: 1,
             });
             localStorage.setItem("test", JSON.stringify(prom));
@@ -247,7 +254,7 @@ const Main = {
             latest = this.card.slice(-1);
             if (latest.length != 0) {
                 latest.forEach(function (elem) {
-                    latestId = elem["id"] + 1;
+                    latestId = elem["id"] + 1000;
                 });
             } else {
                 latestId = 1;
@@ -258,15 +265,16 @@ const Main = {
                     sostav = `${sostav}${elem["name"]}  ${
                         elem["gramm"] * elem["colvo"]
                     }гр ,  `;
-                    this.colvo = this.colvo + elem["colvo"] * elem["price"];
+                    this.colvo_chudu =
+                        this.colvo_chudu + elem["colvo"] * elem["price"];
                 }
             });
             prom.push({
                 id: latestId,
                 img: "chudu111.jpg",
-                name: "#ЯЧуду",
+                name: "ЯЧуду",
                 description: sostav,
-                price: Number(this.colvo) + Number(this.testo),
+                price: Number(this.colvo_chudu) + Number(this.testo_chudu),
                 colvo: 1,
             });
             localStorage.setItem("test", JSON.stringify(prom));
@@ -278,20 +286,27 @@ const Main = {
         },
         itogo_all() {
             itogo = 0;
-            product = this.product
             i = JSON.parse(localStorage.getItem("test"));
             if (i != null) {
                 this.card.forEach(function (elem) {
                     itogo =
                         itogo + Number(elem["colvo"]) * Number(elem["price"]);
-                    product = `${product}${elem.id}.${elem.colvo},`
                 });
             }
             this.itogo = itogo;
-            this.product = product;
         },
         arrange() {
             event.preventDefault();
+            product = "";
+
+            this.card.forEach(function (elem) {
+                if (elem.name != "ЯПицца" && elem.name != "ЯЧуду") {
+                    product = `${product}${elem.id}.${elem.colvo},`;
+                } else {
+                    product = `${product}${elem.name}.${elem.colvo},`;
+                }
+            });
+
             var prom = this.card;
             var add_arrange = new FormData($("#add_arrange")[0]);
             if (this.name != "") {
@@ -301,7 +316,7 @@ const Main = {
                             if (this.sposob != "") {
                                 $.ajax({
                                     type: "POST",
-                                    url: "/add_arrange",
+                                    url: `/add_arrange/${product}`,
                                     cache: false,
                                     contentType: false,
                                     processData: false,
@@ -309,9 +324,17 @@ const Main = {
                                     success: function (data) {
                                         document;
                                         close_arrange.click();
+                                        prom = [];
+                                        localStorage.setItem(
+                                            "test",
+                                            JSON.stringify(prom)
+                                        );
+                                        arrange_suc.click();
                                     },
                                 });
                                 document.getElementById("add_arrange").reset();
+                                this.card = []; // после оформления чтоб корзина очистилась + сумма в итого
+                                this.itogo = 0;
                             } else {
                                 this.error_sposob = "Укажите способ оплаты";
                                 this.error_tel = "";
@@ -325,6 +348,7 @@ const Main = {
                         }
                     } else {
                         this.error_tel = "Введите 11 символов";
+                        this.error_name = "";
                     }
                 } else {
                     this.error_tel = "Укажите телефон";

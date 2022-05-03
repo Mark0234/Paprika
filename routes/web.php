@@ -16,11 +16,11 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', [MainController::class, 'welcome'])->name('home');
+Route::get('/constr/{id}', [MainController::class, 'constr']);
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/check_tel/{tel}', [AuthController::class, 'check_tel']);
 Route::post('/login', [AuthController::class, 'login_process']);
-Route::post('/register', [AuthController::class, 'register_process']);
 Route::get('/add_basket/{id}', [MainController::class, 'add_basket']);
 Route::get('/all_card', [MainController::class, 'all_card']);
 Route::get('/all_product', [MainController::class, 'all_product']);
@@ -35,7 +35,7 @@ Route::get('/const_chudu_all', [MainController::class, 'const_chudu_all']);
 Route::post('/edit_const_chudu/{id}', [MainController::class, 'edit_const_chudu']);
 Route::get('/delete_ingradient_chudu/{id}', [MainController::class, 'delete_ingradient_chudu']);
 
-Route::post('/add_arrange', [MainController::class, 'add_arrange']);
+Route::post('/add_arrange/{products}', [MainController::class, 'add_arrange']);
 
 
 

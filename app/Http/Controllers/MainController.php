@@ -309,18 +309,17 @@ class MainController extends Controller
         Const_chudu_Model::find($id)->delete(); //Удаление инградиентов
     }
 
-    public function add_arrange(Request $data)
+    public function add_arrange(Request $data, $products)
     {
         $valid = $data->validate([
             'name' => ['required'],
             'tel' => ['required', 'min:10' , 'max:12'],
             'address' => ['required'],
-            'message' => ['min:3', 'max:250'],
             'sposob' => ['required'],
         ]);
 
         $add_arrange = new Add_arrange_Model(); //Добовление  в базу
-        $product = rtrim($data->input('product'), ",");
+        $product = rtrim($products, ",");
         $add_arrange->product = $product;
         $add_arrange->sum = $data->input('sum');
         $add_arrange->name = $data->input('name');
@@ -333,5 +332,55 @@ class MainController extends Controller
         }
         $add_arrange->sposob = $data->input('sposob');
         $add_arrange->save();
+
+        $zakaz = explode(",", $product);
+        $card_zakaz = '';
+        foreach($zakaz as $item) {
+            $tovar_count = MenuCategoryCardModel::where('id', '=', trim(strstr($item, '.', true)))->count();
+            if($tovar_count != 0) {
+                $tovar = MenuCategoryCardModel::where('id', '=', trim(strstr($item, '.', true)))->first();
+                $card_zakaz = $card_zakaz.$tovar->name.' ['.trim(strstr($item, '.'), '. ').'шт], ';
+            } else {
+                $card_zakaz = $card_zakaz.trim(strstr($item, '.', true)).' ['.trim(strstr($item, '.'), '. ').'шт], ';
+            }
+            
+        }
+
+        $token = "5325438919:AAH4TQZw759HBqm-mHe2q7dmyzKpq1X4Y-8";
+        $chat_id = "-678718560";
+        $arr = array(
+            'Номер заказа: ' => $add_arrange->id,
+            'Время: ' => date('Y-m-d').' - '.date('h-m'),
+            'Имя: ' => $data->input('name'),
+            'Телефон: ' => $data->input('tel'),
+            'Адрес: ' => $data->input('address'),
+            'Сообщение: ' => $data->input('message'),
+            'Способ оплаты: ' => $data->input('sposob'),
+            'Заказ: ' => rtrim($card_zakaz, ","),
+            'Итого: ' => $data->input('sum').'₽',
+        );
+
+        $txt = '';
+
+        foreach($arr as $key => $value) {
+            $txt .= "<b>".$key."</b> ".$value."%0A";
+        };
+
+        $sendToTelegram = fopen("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&parse_mode=html&text={$txt}","r");
+
+        // if($sendToTelegram) {
+        // } else {
+        //     echo "Ошибка";
+        // }
+    }
+
+    public function constr($id){
+        $const = Add_arrange_Model::find($id);
+        return view('const',['item'=>$const]);
     }
 };
+
+
+
+
+// https://api.telegram.org/bot5325438919:AAH4TQZw759HBqm-mHe2q7dmyzKpq1X4Y-8/getUpdates

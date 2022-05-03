@@ -803,7 +803,7 @@
 
     <!-- модальное окно при успешном редоктировании -->
     <button class="d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modaledit"></button>
-
+    
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

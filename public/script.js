@@ -109,22 +109,30 @@ function check() {
                         lable.classList.remove("text-danger");
                         lable.classList.add("text-muted");
                     } else {
-                        document.getElementById("header").innerHTML =
-                            '<i class="bi bi-person"></i> Регистрация аккаунта';
-                        document.getElementById("lable").innerHTML =
-                            "Придумайте пароль (не менее 8 сим.)";
-                        lable.classList.remove("text-danger");
-                        lable.classList.add("text-muted");
-                        document.getElementById("psw_show").style =
-                            "display:block;";
-                        document.getElementById("psw_show_confirm").style =
-                            "display:block;";
-                        document.getElementById("tel_show").style =
-                            "display:none;";
-                        document.getElementById("btn_go").style =
-                            "display:none;";
-                        document.getElementById("btn_reg").style =
-                            "display:block;";
+                        // удалить ниже кусок кода если надо зарегистрировать человека
+                        var error = "Номер не зарегистрирован";
+                        document.getElementById("tell_mess").innerHTML = error;
+                        tell_mess.classList.remove("text-muted");
+                        tell_mess.classList.add("text-danger");
+
+                        // раскамитить reg если надо будет регистировать человека
+
+                        // document.getElementById("header").innerHTML =
+                        //     '<i class="bi bi-person"></i> Регистрация аккаунта';
+                        // document.getElementById("lable").innerHTML =
+                        //     "Придумайте пароль (не менее 8 сим.)";
+                        // lable.classList.remove("text-danger");
+                        // lable.classList.add("text-muted");
+                        // document.getElementById("psw_show").style =
+                        //     "display:block;";
+                        // document.getElementById("psw_show_confirm").style =
+                        //     "display:block;";
+                        // document.getElementById("tel_show").style =
+                        //     "display:none;";
+                        // document.getElementById("btn_go").style =
+                        //     "display:none;";
+                        // document.getElementById("btn_reg").style =
+                        //     "display:block;";
                     }
                 },
             });
@@ -180,35 +188,37 @@ function login() {
     });
 }
 
-function reg() {
-    var token = document.getElementsByName("_token")[0].value;
-    var tel = document.getElementById("tel").value;
-    var pass1 = document.getElementById("password_one").value;
-    var pass2 = document.getElementById("password_two").value;
-    $.ajax({
-        url: `/register`,
-        method: "post",
-        dataType: "html",
-        data: {
-            _token: token,
-            tel: tel,
-            password: pass1,
-            password_confirmation: pass2,
-        },
-        success: function (data) {
-            if (data == 1) {
-                window.location.href = "/admin";
-            } else {
-                if (pass1 != pass2) {
-                    document.getElementById("lable").innerHTML =
-                        "Пароли не совпадают!";
-                    lable.classList.remove("text-muted");
-                    lable.classList.add("text-danger");
-                }
-            }
-        },
-    });
-}
+// раскамитить reg если надо будет регистировать человека
+
+// function reg() {
+//     var token = document.getElementsByName("_token")[0].value;
+//     var tel = document.getElementById("tel").value;
+//     var pass1 = document.getElementById("password_one").value;
+//     var pass2 = document.getElementById("password_two").value;
+//     $.ajax({
+//         url: `/register`,
+//         method: "post",
+//         dataType: "html",
+//         data: {
+//             _token: token,
+//             tel: tel,
+//             password: pass1,
+//             password_confirmation: pass2,
+//         },
+//         success: function (data) {
+//             if (data == 1) {
+//                 window.location.href = "/admin";
+//             } else {
+//                 if (pass1 != pass2) {
+//                     document.getElementById("lable").innerHTML =
+//                         "Пароли не совпадают!";
+//                     lable.classList.remove("text-muted");
+//                     lable.classList.add("text-danger");
+//                 }
+//             }
+//         },
+//     });
+// }
 
 function show(btn, input) {
     btn = document.getElementById(btn);
