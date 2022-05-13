@@ -253,7 +253,7 @@ const Main_menu = {
         },
 
         //редактирование карточек через ajax
-        editСategory_card(sas) {
+        editСategory_card(id, sas) {
             event.preventDefault(); // Запрещает обновляться странице . только для формы
             this.card.forEach(function (e_item) {
                 if (e_item.id == sas) {
@@ -273,7 +273,7 @@ const Main_menu = {
                                     success: function (data) {
                                         document
                                             .getElementById(
-                                                `close_edit_card${e_item.id}`
+                                                `close_edit_card${id}${e_item.id}`
                                             )
                                             .click();
                                         e_item.img = data;
@@ -292,7 +292,7 @@ const Main_menu = {
             });
         },
 
-        deleteСategorycard(sas) {
+        deleteСategorycard(id, sas) {
             cards = this.card;
             this.card.forEach(function (e_item, $key) {
                 if (e_item.id == sas) {
@@ -307,7 +307,9 @@ const Main_menu = {
                         success: function (data) {
                             cards.splice($key, 1);
                             document
-                                .getElementById(`closedeletecard${e_item.id}`)
+                                .getElementById(
+                                    `closedeletecard${id}${e_item.id}`
+                                )
                                 .click();
                         },
                     });

@@ -173,24 +173,24 @@
                                                         class="col mt-3">
 
                                                         <div class="card border-secondary bg-light"
-                                                            style="height: 410px;">
+                                                            style="height: 450px;">
                                                             <img :src="'/storage/card/' + prom.img"
                                                                 {{-- вывод картинки в шаблон vue3 --}}
                                                                 style="height: 200px; object-fit: cover;"
                                                                 class="card-img-top" alt="...">
                                                             <div class="card-body text-black">
-                                                                <h3 class="card-title text-center">
+                                                                <h3 class="card-title">
                                                                     @{{ prom.name }}</h3>
                                                                 <p class="card-text">@{{ prom.description }}</p>
                                                                 <p class="text-start">Цена: @{{ prom.price }}₽
                                                                 </p>
                                                                 <div class="d-flex">
                                                                     <button data-bs-toggle="modal"
-                                                                        :data-bs-target="'#editcard' + prom.id"
+                                                                        :data-bs-target="'#editcard' + item.id + prom.id"
                                                                         class="btn btn-warning w-50 text-dark me-1"><i
                                                                             class="bi bi-basket"></i> Ред.</button>
                                                                     <button data-bs-toggle="modal"
-                                                                        :data-bs-target="'#deletecard' + prom.id"
+                                                                        :data-bs-target="'#deletecard' + item.id + prom.id"
                                                                         class="btn btn-danger text-light w-50 me-1"><i
                                                                             class="bi bi-basket"></i> Удалить</button>
                                                                 </div>
@@ -198,13 +198,14 @@
                                                         </div>
 
                                                         <!-- Модальное окно удаления карточки категории в меню -->
-                                                        <div class="modal fade" :id="'deletecard' + prom.id"
-                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                            aria-hidden="true">
+                                                        <div class="modal fade"
+                                                            :id="'deletecard' + item.id + prom.id" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <button :id="'closedeletecard' + prom.id"
+                                                                        <button
+                                                                            :id="'closedeletecard' + item.id + prom.id"
                                                                             type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
@@ -217,7 +218,7 @@
                                                                                 class="btn btn-secondary"
                                                                                 data-bs-dismiss="modal">Назад</button>
                                                                             <button class="btn btn-danger ms-2"
-                                                                                v-on:click='deleteСategorycard(prom.id)'>Удалить</button>
+                                                                                v-on:click='deleteСategorycard(item.id,prom.id)'>Удалить</button>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -231,9 +232,9 @@
                                                         <!-- Модальное окно удаления карточки категории в меню конец -->
 
                                                         <!-- Модальное окно редактирования карточки категории в меню -->
-                                                        <div class="modal fade" :id="'editcard' + prom.id"
-                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                            aria-hidden="true">
+                                                        <div class="modal fade"
+                                                            :id="'editcard' + item.id + prom.id" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -241,7 +242,8 @@
                                                                             id="exampleModalLabel">Редактировать
                                                                             Карточку
                                                                         </h5>
-                                                                        <button :id="'close_edit_card' + prom.id"
+                                                                        <button
+                                                                            :id="'close_edit_card' + item.id + prom.id"
                                                                             type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
@@ -297,7 +299,7 @@
 
                                                                             <button type="button"
                                                                                 class="btn btn-primary text-white"
-                                                                                v-on:click="editСategory_card(prom.id)">Изменить</button>
+                                                                                v-on:click="editСategory_card(item.id,prom.id)">Изменить</button>
                                                                         </form>
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -803,7 +805,7 @@
 
     <!-- модальное окно при успешном редоктировании -->
     <button class="d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modaledit"></button>
-    
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

@@ -24,6 +24,7 @@ class MainController extends Controller
         return view('welcome',['main' => $main, 'main_home' => $main_home,'category' => $category,'category_card' => $category_card]);
     }
 
+
     public function admin()
     {
         if(MainModel::count() == 0) {
@@ -383,4 +384,3 @@ class MainController extends Controller
 
 
 
-// https://api.telegram.org/bot5325438919:AAH4TQZw759HBqm-mHe2q7dmyzKpq1X4Y-8/getUpdates

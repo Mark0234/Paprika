@@ -222,24 +222,33 @@ const Main = {
                 this.card = [];
                 latestId = 1;
             }
-            var sostav = "";
+            if (this.testo_pizza == 100) {
+                //цена на тонкую пиццу
+                var testo = "тонкое";
+            } else if (this.testo_pizza == 150) {
+                //цена на толстую пиццу
+                var testo = "толстое";
+            }
+            var sostav = `Тесто: ${testo} `;
             this.ingradient_pizza.forEach(function (elem) {
                 if (elem["colvo"] != 0) {
                     sostav = `${sostav}${elem["name"]}  ${
                         elem["gramm"] * elem["colvo"]
-                    }гр ,  `;
+                    }гр  `;
                     this.colvo_pizza =
                         this.colvo_pizza + elem["colvo"] * elem["price"];
                 }
             });
+            var price_c = Number(this.colvo_pizza) + Number(this.testo_pizza);
             prom.push({
                 id: latestId,
                 img: "pizza2.png",
                 name: "ЯПицца",
                 description: sostav,
-                price: Number(this.colvo_pizza) + Number(this.testo_pizza),
+                price: price_c,
                 colvo: 1,
             });
+            ////////////////////
             localStorage.setItem("test", JSON.stringify(prom));
             document.getElementById("pizza").innerHTML =
                 '<i class="bi bi-check-lg"></i> Добавлено в корзину';
@@ -259,22 +268,30 @@ const Main = {
             } else {
                 latestId = 1;
             }
-            var sostav = "";
+            if (this.testo_chudu == 100) {
+                //цена на тонкое чуду
+                var testo = "тонкое";
+            } else if (this.testo_chudu == 200) {
+                //цена на толстое чуду
+                var testo = "толстое";
+            }
+            var sostav = `Тесто: ${testo} `;
             this.ingradient_chudu.forEach(function (elem) {
                 if (elem["colvo"] != 0) {
                     sostav = `${sostav}${elem["name"]}  ${
                         elem["gramm"] * elem["colvo"]
-                    }гр ,  `;
+                    }гр `;
                     this.colvo_chudu =
                         this.colvo_chudu + elem["colvo"] * elem["price"];
                 }
             });
+            var price_c = Number(this.colvo_chudu) + Number(this.testo_chudu);
             prom.push({
                 id: latestId,
                 img: "chudu111.jpg",
                 name: "ЯЧуду",
                 description: sostav,
-                price: Number(this.colvo_chudu) + Number(this.testo_chudu),
+                price: price_c,
                 colvo: 1,
             });
             localStorage.setItem("test", JSON.stringify(prom));
@@ -303,7 +320,7 @@ const Main = {
                 if (elem.name != "ЯПицца" && elem.name != "ЯЧуду") {
                     product = `${product}${elem.id}.${elem.colvo},`;
                 } else {
-                    product = `${product}${elem.name}.${elem.colvo},`;
+                    product = `${product}${elem.name}.${elem.description} - ${elem.colvo},`;
                 }
             });
 
